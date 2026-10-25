@@ -14,8 +14,8 @@ use eclipse_zk_lib::{
     BatchProofWitness, BatchPublicJournalSol, OrderSide, PrivateOrder,
 };
 use sp1_sdk::{
-    blocking::{Prover, ProverClient},
-    include_elf, Elf, SP1Stdin,
+    blocking::{ProveRequest, Prover, ProverClient},
+    include_elf, Elf, ProvingKey, SP1Stdin,
 };
 
 /// The ELF file for the Eclipse Batch Netting SP1 zkVM guest.
