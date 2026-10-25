@@ -1,0 +1,9 @@
+[package]
+name = "eclipse-zk-lib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { workspace = true }
+tiny-keccak = { workspace = true }
+alloy-sol-types = { workspace = true }

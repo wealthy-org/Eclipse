@@ -1,0 +1,637 @@
+<a class="skip" href="#terminal">Skip to the demo terminal</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gLogo" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F3F0FF"/><stop offset=".5" stop-color="#BFB4FF"/><stop offset="1" stop-color="#7C6CF0"/></linearGradient>
+    <mask id="mLogo" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/><circle cx="19.6" cy="12.4" r="9.3" fill="#000"/></mask>
+    <mask id="mAp" maskUnits="userSpaceOnUse" x="-100" y="-100" width="200" height="200"><circle r="65.5" fill="#fff"/><circle cx="6.5" cy="-6.5" r="62.5" fill="#000"/></mask>
+    <linearGradient id="gCres" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F1EDFF"/><stop offset=".35" stop-color="#B7ABFF" stop-opacity=".75"/><stop offset=".7" stop-color="#9B8CFF" stop-opacity="0"/></linearGradient>
+    <radialGradient id="gCore"><stop offset="0" stop-color="#010102"/><stop offset=".7" stop-color="#05050A"/><stop offset="1" stop-color="#191530"/></radialGradient>
+    <linearGradient id="gRim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D5CDFF" stop-opacity=".05"/><stop offset=".5" stop-color="#9B8CFF" stop-opacity=".3"/><stop offset="1" stop-color="#E4DEFF" stop-opacity=".95"/></linearGradient>
+  </defs>
+  <symbol id="logo" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12.5" fill="none" stroke="#D5CDFF" stroke-opacity=".3" stroke-width="1"/><circle cx="16" cy="16" r="12" fill="url(#gLogo)" mask="url(#mLogo)"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="container"><div class="nav-in">
+    <a class="brand" href="#top" aria-label="Eclipse, back to top"><img src="/logo-eclipse.png" srcset="/logo-eclipse.png 1x, /logo-eclipse@2x.png 2x" width="26" height="26" alt="" aria-hidden="true" class="brand-logo"><span>Eclipse</span><small>App</small></a>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="#hook" data-nav="hook">Hook</a>
+      <a href="#how" data-nav="how">How it works</a>
+      <a href="#waves" data-nav="waves">Eclipse Waves</a>
+      <a href="#privacy" data-nav="privacy">Privacy</a>
+      <a href="#docs" data-nav="docs" class="nav-docs">Docs</a>
+    </nav>
+    <button class="btn btn-sm btn-ghost" data-action="open-app">Open App<span data-icon="arrow"></span></button>
+    <i class="nav-prog" id="navProg" aria-hidden="true"></i>
+  </div></div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-labelledby="heroTitle">
+  <div class="hero-scene" aria-hidden="true"><svg id="scene"></svg></div>
+  <svg class="rise" id="rise" aria-hidden="true">
+    <defs>
+      <radialGradient id="gGlow"><stop offset="0" stop-color="#B9ADFF" stop-opacity=".75"/><stop offset=".4" stop-color="#9B8CFF" stop-opacity=".25"/><stop offset="1" stop-color="#9B8CFF" stop-opacity="0"/></radialGradient>
+      <radialGradient id="gGlowMint"><stop offset="0" stop-color="#A6F2D4" stop-opacity=".8"/><stop offset=".45" stop-color="#83E8C0" stop-opacity=".22"/><stop offset="1" stop-color="#83E8C0" stop-opacity="0"/></radialGradient>
+      <radialGradient id="gGlowWhite"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".7"/><stop offset=".4" stop-color="#F3F4F8" stop-opacity=".18"/><stop offset="1" stop-color="#F3F4F8" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g id="riseG"></g>
+  </svg>
+
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow enter" style="--d:0">Built on Uniswap v4 Hooks</p>
+      <h1 id="heroTitle" class="enter" style="--d:1">Every market deserves a <span class="hl">dark&nbsp;mode.</span></h1>
+      <p class="lede enter" style="--d:2">Swap on Uniswap v4 without showing your hand. Orders batch privately, buyers and sellers fill each other, and only the leftover hits the pool.</p>
+      <div class="hero-ctas enter" style="--d:3">
+        <button class="btn btn-primary" data-action="try-wave"><span data-icon="wave"></span>Try a Eclipse Wave</button>
+        <a class="btn btn-ghost" href="#hook">See the hook<span data-icon="arrow"></span></a>
+      </div>
+    </div>
+
+    <div class="rail enter" style="--d:3" aria-hidden="true">
+      <div class="node">
+        <div class="rail-label"><b id="railWave">Eclipse Wave #185</b><span id="railState">Open · 00:24</span></div>
+        <div class="ap" id="aperture">
+          <svg viewBox="-100 -100 200 200">
+            <circle r="97" class="ap-halo"/>
+            <circle r="86" class="ap-track"/>
+            <circle r="86" class="ap-count" id="apCount" pathLength="100" transform="rotate(-90)"/>
+            <circle r="64" fill="url(#gCore)"/>
+            <circle r="64" class="ap-rim"/>
+            <circle r="65.5" fill="url(#gCres)" mask="url(#mAp)" class="ap-cres"/>
+            <g class="ap-arcs"><path d="M-40 16a40 40 0 0 1 80 0"/><path d="M-22 16a28 28 0 0 1 56 0"/><path d="M-4 16a16 16 0 0 1 32 0"/></g>
+          </svg>
+        </div>
+      </div>
+      <div class="rail-line"><i></i></div>
+      <div class="gate" id="hookGate"><span data-icon="gate"></span><span class="gate-l" id="gateL">EclipseHook</span></div>
+      <div class="rail-line"><i></i></div>
+      <div class="node node-end">
+        <div class="endpoint" id="endpoint"><span data-icon="lattice"></span></div>
+        <div class="rail-label"><b>Uniswap v4</b><span>Public liquidity</span></div>
+      </div>
+    </div>
+
+    <section class="spot term" id="terminal" data-mode="dark" aria-labelledby="termTitle" tabindex="-1">
+      <span class="lift" id="lift" aria-hidden="true" data-icon="order"></span>
+      <div class="term-head">
+        <h2 class="term-title" id="termTitle">Trade <span class="mono">WETH / USDG</span></h2>
+        <span class="sim">Simulated pricing</span>
+      </div>
+      <div class="mode" role="radiogroup" aria-label="Execution mode" id="modeGroup">
+        <span class="mode-thumb" aria-hidden="true"></span>
+        <button type="button" role="radio" aria-checked="false" data-mode="public" tabindex="-1"><span data-icon="lattice"></span>Public<small>Instant</small></button>
+        <button type="button" role="radio" aria-checked="true" data-mode="dark" tabindex="0"><span data-icon="wave"></span>Dark<small>Next wave</small></button>
+      </div>
+      <div class="collapse open" id="wavePanel"><div>
+        <div class="wave-box" id="waveBox">
+          <div class="ring" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" class="r-track"/><circle cx="24" cy="24" r="20" class="r-prog" id="ringProg" pathLength="100"/></svg><span id="ringNum" class="mono">24</span></div>
+          <div class="wave-txt"><b id="waveTitle">Next Eclipse Wave #185</b><span id="waveSub" class="mono">Closes in 00:24</span></div>
+          <div class="wave-demand"><span>Private demand</span><b>Hidden</b></div>
+        </div>
+      </div></div>
+
+      <div class="field" id="fieldIn">
+        <div class="f-top"><label for="amountIn">You pay</label><span class="bal">Balance <span class="mono" id="balIn">–</span><button type="button" class="max" id="maxBtn" aria-label="Use full demo balance">Max</button></span></div>
+        <div class="f-main">
+          <input id="amountIn" class="amt" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0.00" aria-describedby="amountErr inUsd">
+          <button type="button" class="tok" id="tokIn" data-side="in" aria-haspopup="listbox" aria-expanded="false"></button>
+        </div>
+        <div class="f-sub"><span id="inUsd">≈ $0.00</span><span id="amountErr" class="err-msg" aria-live="polite"></span></div>
+      </div>
+      <div class="switch"><button type="button" class="dir" id="dirBtn" aria-label="Switch pay and receive tokens"><span data-icon="swap"></span></button></div>
+      <div class="field">
+        <div class="f-top"><span id="outLabel">You receive · estimated</span><span class="bal">Balance <span class="mono" id="balOut">–</span></span></div>
+        <div class="f-main">
+          <output id="amountOut" class="amt amt-out zero" for="amountIn">0.00</output>
+          <button type="button" class="tok" id="tokOut" data-side="out" aria-haspopup="listbox" aria-expanded="false"></button>
+        </div>
+        <div class="f-sub"><span id="rateLine">1 WETH = 3,142.50 USDG</span><span id="impact"></span></div>
+      </div>
+
+      <dl class="rows">
+        <div class="row"><dt>Minimum received</dt><dd><b id="minOut">–</b></dd></div>
+        <div class="row"><dt id="slipLbl">Max slippage</dt><dd>
+          <div class="slip" role="group" aria-labelledby="slipLbl" id="slipGroup">
+            <button type="button" data-slip="0.1" aria-pressed="false">0.1%</button>
+            <button type="button" data-slip="0.5" aria-pressed="true">0.5%</button>
+            <button type="button" data-slip="1" aria-pressed="false">1%</button>
+            <label id="slipCustomWrap"><input id="slipCustom" inputmode="decimal" placeholder="Custom" aria-label="Custom slippage percent, 0.05 to 5"><span class="pc">%</span></label>
+          </div></dd></div>
+        <div class="row"><dt>Execution</dt><dd><b id="execLine">Next Eclipse Wave</b></dd></div>
+        <div class="row"><dt>Fees <span class="tip">· simulated</span></dt><dd><b id="feeLine">5 bps + pool fee on net</b></dd></div>
+      </dl>
+
+      <button type="button" class="cta" id="cta"><span class="cta-label" id="ctaLabel">Start demo</span></button>
+      <div class="collapse" id="trackWrap"><div>
+        <div class="track" id="track" aria-hidden="true"></div>
+        <p class="track-note" id="trackNote"><span>Rise Swap</span><span>Accelerated demo timing</span></p>
+      </div></div>
+      <div class="collapse" id="resultWrap"><div><div class="result" id="result" tabindex="-1"></div></div></div>
+      <p class="disc"><span data-icon="info"></span>Demo only. Privacy depends on the deployed funding, operator, and settlement design.</p>
+      <div class="sr" aria-live="polite" id="live"></div>
+      <div class="tok-pop" id="tokPop" role="listbox" aria-label="Select token" hidden></div>
+    </section>
+  </div>
+</section>
+
+<section class="origin" id="origin" aria-labelledby="originTitle">
+  <div class="container">
+    <div class="og">
+      <div class="og-t"><p class="eyebrow">Origin</p>
+        <h2 id="originTitle">Born from the Hook.<br><span class="chev3" aria-hidden="true"><i></i><i></i><i></i></span><span class="og-g">Built for private execution.</span></h2>
+      <p class="og-p">Uniswap v4 Hooks made market execution programmable. Eclipse extends that capability into a private execution layer: combining private orders, matching them inside a Eclipse Wave, and settling only the remaining imbalance against public liquidity.</p></div>
+      <figure class="shard-wrap" aria-hidden="true"><svg id="shards" viewBox="-150 -150 300 300"></svg><figcaption class="shard-cap"><span>Many private orders</span><span>One aperture</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="block goals" id="goals" aria-labelledby="goalsTitle">
+  <div class="container">
+    <div class="sec-head center"><div><h2 id="goalsTitle">Nothing new to learn.</h2></div><p>Same wallet. Same pool. Eclipse adds one private step before your swap.</p></div>
+    <ul class="iso-cards" aria-label="Design goals">
+      <li tabindex="0"><div class="iso" data-iso="wallet"></div><div class="iso-tx"><p class="t1">Works with the wallet you already use.</p><p class="t2">One signature from the wallet you already use. No new seed phrase.</p></div></li>
+      <li tabindex="0"><div class="iso" data-iso="pool"></div><div class="iso-tx"><p class="t1">Same pool, same liquidity.</p><p class="t2">Public swaps and Eclipse Waves trade the same Uniswap v4 pool. No liquidity split.</p></div></li>
+      <li tabindex="0"><div class="iso" data-iso="wave"></div><div class="iso-tx"><p class="t1">Orders wait in a Eclipse Wave.</p><p class="t2">A short private batch. Nobody sees buy or sell, or how much, until it settles.</p></div></li>
+      <li tabindex="0"><div class="iso" data-iso="net"></div><div class="iso-tx"><p class="t1">Only the leftover hits the pool.</p><p class="t2">Buyers and sellers fill each other first. The hook checks what is left.</p></div></li>
+      <li tabindex="0"><div class="iso" data-iso="settle"></div><div class="iso-tx"><p class="t1">Your funds stay yours.</p><p class="t2">Designed so a pause can stop new orders, never refunds or withdrawals.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block hook-sec" id="hook" aria-labelledby="hookTitle">
+  <div class="container">
+    <div class="sec-head center">
+      <div><p class="eyebrow">EclipseHook</p><h2 id="hookTitle">One pool. One hook.<br>Two ways to trade it.</h2></div>
+      <p>Normal swaps pass straight through. A Eclipse Wave trade fills only if the hook confirms it matches the batch exactly. No match, no fill.</p>
+      <a class="txt-link" href="#docs/hook">How the hook works<span data-icon="arrow"></span></a>
+    </div>
+
+    <div class="spot hk" id="hk">
+      <div class="hk-bar">
+        <div class="hk-sc" id="hkSc" role="radiogroup" aria-label="Scenario"></div>
+        <button type="button" class="btn btn-sm btn-primary" id="hkRun"><span data-icon="replay"></span>Run lifecycle</button>
+      </div>
+      <ol class="hk-life" id="hkLife" aria-label="Swap lifecycle"></ol>
+      <div class="hk-grid">
+        <div class="hk-left">
+          <div class="hk-h"><h3>beforeSwap checks</h3></div>
+          <ul class="hk-checks" id="hkChecks"></ul>
+          <div class="hk-res" id="hkRes" aria-live="polite"></div>
+        </div>
+        <div class="code hk-code">
+          <div class="code-bar"><span>EclipseHook.sol</span><span class="sim">Illustrative · not deployed</span></div>
+          <pre id="hkCode" aria-label="Illustrative hook pseudocode"></pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="block" id="how" aria-labelledby="howTitle">
+  <div class="container">
+    <div class="sec-head center">
+      <div><p class="eyebrow">How it works</p><h2 id="howTitle">Orders go in privately. Only the difference goes out.</h2></div>
+      <p>Most of the volume is matched inside the wave, so it never shows up on the pool.</p>
+    </div>
+    <div class="flow-stage" id="flowStage">
+      <svg class="flow-svg" viewBox="0 0 1200 380" aria-hidden="true">
+        <defs>
+          <linearGradient id="gFlow" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#9B8CFF" stop-opacity=".2"/><stop offset=".55" stop-color="#9B8CFF"/><stop offset="1" stop-color="#D5CDFF"/></linearGradient>
+          <radialGradient id="gNode"><stop offset="0" stop-color="#9B8CFF" stop-opacity=".28"/><stop offset="1" stop-color="#9B8CFF" stop-opacity="0"/></radialGradient>
+        </defs>
+        <path class="f-track" d="M 20 190 L 150 190 C 250 190 330 150 450 190 C 570 230 650 230 750 190 C 850 150 930 190 1050 190"/>
+        <path class="f-active" id="fActive" d="M 20 190 L 150 190 C 250 190 330 150 450 190 C 570 230 650 230 750 190 C 850 150 930 190 1050 190"/>
+        <g class="f-br" id="fBr">
+          <path d="M290 34 C 350 52 405 120 450 190"/><path d="M250 350 C 340 340 405 262 450 190"/><path d="M382 10 C 410 62 436 122 450 190"/><path d="M352 372 C 400 332 432 262 450 190"/>
+          <rect x="283" y="26" width="12" height="15" rx="2"/><rect x="243" y="342" width="12" height="15" rx="2"/><rect x="376" y="2" width="12" height="15" rx="2"/><rect x="346" y="364" width="12" height="15" rx="2"/>
+        </g>
+        <g class="f-pr" id="fPr">
+          <path class="b" d="M660 48 C 702 80 746 130 750 190"/><path class="b" d="M724 14 C 742 70 750 124 750 190"/>
+          <path class="s" d="M842 332 C 800 300 754 250 750 190"/><path class="s" d="M778 366 C 760 312 750 256 750 190"/>
+        </g>
+        <g class="f-net" id="fNet"><path d="M1096 190 L 1138 190"/><path d="M1130 182 l8 8 -8 8"/></g>
+        <g class="fnode" data-n="0" transform="translate(150 190)"><circle class="glow" r="92"/><circle class="bg" r="46"/><g data-gicon="order" transform="translate(-18 -18) scale(1.5)"></g></g>
+        <g class="fnode" data-n="1" transform="translate(450 190)"><circle class="glow" r="92"/><circle class="bg" r="46"/><g data-gicon="wave" transform="translate(-18 -20) scale(1.5)"></g></g>
+        <g class="fnode" data-n="2" transform="translate(750 190)"><circle class="glow" r="92"/><circle class="bg" r="46"/><g data-gicon="match" transform="translate(-18 -18) scale(1.5)"></g></g>
+        <g class="fnode" data-n="3" transform="translate(1050 190)"><circle class="glow" r="92"/><circle class="bg" r="46"/><g data-gicon="net" transform="translate(-18 -18) scale(1.5)"></g></g>
+        <g class="f-end" id="fEnd" transform="translate(1166 190)"><circle r="24"/><g data-gicon="lattice" transform="translate(-13 -13) scale(1.08)"></g><text class="f-lbl" y="52" text-anchor="middle">Public pool</text></g>
+        <text class="f-tag" data-t="0" x="300" y="152" text-anchor="middle">commitment</text>
+        <text class="f-tag" data-t="1" x="600" y="262" text-anchor="middle">batch window · 30 s</text>
+        <text class="f-tag" data-t="2" x="900" y="146" text-anchor="middle">net remainder only</text>
+        <circle class="f-head" id="fHead" r="3.5" cx="20" cy="190"/>
+      </svg>
+      <div class="flow-steps" id="flowSteps">
+        <div class="flow-line" aria-hidden="true"><i id="flowLine"></i></div>
+        <div class="fstep" data-n="0"><span class="fi" data-icon="order"></span><span class="n">01</span><h3>Submit an order</h3><p>Sign once and set your minimum. Your order goes into the wave, not the public mempool.</p></div>
+        <div class="fstep" data-n="1"><span class="fi" data-icon="wave"></span><span class="n">02</span><h3>Join a Eclipse Wave</h3><p>Orders collect for a few seconds. Nothing about the batch is shown until it closes.</p></div>
+        <div class="fstep" data-n="2"><span class="fi" data-icon="match"></span><span class="n">03</span><h3>Match buyers with sellers</h3><p>Opposite orders fill each other by fixed rules, not by anyone's choice.</p></div>
+        <div class="fstep" data-n="3"><span class="fi" data-icon="net"></span><span class="n">04</span><h3>Trade only the leftover</h3><p>EclipseHook checks the leftover, the pool fills it, then everyone is paid out.</p></div>
+      </div>
+    </div>
+    <div class="flow-foot"><p>Every wave balances · <b>BUY − SELL = NET</b> · before fees</p></div>
+  </div>
+</section>
+
+<section class="block obs-sec" id="observer" aria-labelledby="obsTitle">
+  <div class="container obs">
+    <div class="obs-copy">
+      <h2 class="h2" id="obsTitle">Ten orders. One footprint.</h2>
+      <p class="lead">Ten public swaps give bots, copy-traders and whale watchers ten signals. Through one Eclipse Wave, they see one combined trade.</p>
+      <div class="eyes" id="eyes" aria-hidden="true"></div>
+      <div class="seg" id="obsSeg" role="group" aria-label="Observer view">
+        <span class="thumb" aria-hidden="true"></span>
+        <button type="button" aria-pressed="true" data-view="public"><span data-icon="lattice"></span>Public swaps</button>
+        <button type="button" aria-pressed="false" data-view="dark"><span data-icon="wave"></span>Eclipse Wave</button>
+      </div>
+    </div>
+    <div class="spot explorer" id="explorer" aria-live="polite">
+      <div class="ex-head"><span>Chain observer · illustrative</span></div>
+      <div class="ex-cols"><span>From</span><span>Swap</span><span>Amount</span><span>Time</span></div>
+      <div class="ex-body">
+        <ol id="exRows"></ol>
+        <div class="ex-agg" id="exAgg">
+          <div class="ag-top"><span>Eclipse Executor · Wave #184</span><span>12:00:31</span></div>
+          <div class="ag-main"><span data-icon="net"></span><div><div class="ag-amt">2,000.00 USDG → WETH</div></div></div>
+          <p class="ag-sub">One combined trade on the pool. No individual wallet, size or direction appears as a swap.</p>
+        </div>
+      </div>
+      <div class="ex-foot"><span id="exFootL">Visible swaps</span><b id="exFootR">10</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="waves" aria-labelledby="wavesTitle">
+  <div class="container">
+    <div class="sec-head center">
+      <div><p class="eyebrow">Eclipse Waves</p><h2 id="wavesTitle">Private while it forms.<br>Public once it settles.</h2></div>
+      <p>Nothing about a wave shows until it trades. Then it leaves a public receipt anyone can check.</p>
+    </div>
+    <div class="spot console">
+      <div class="console-bar"><span class="sim">Simulated activity</span><div class="console-stats" id="cStats"></div></div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption class="sr">Simulated Eclipse Wave activity</caption>
+          <thead><tr><th scope="col">Wave</th><th scope="col">Market</th><th scope="col">Orders</th><th scope="col">Status</th><th scope="col">Leftover to pool</th><th scope="col" class="c-nt">Netting</th><th scope="col"><span class="sr">Details</span></th></tr></thead>
+          <tbody id="wRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="privacy" aria-labelledby="phTitle">
+  <div class="container">
+    <div class="sec-head center">
+      <div><p class="eyebrow">Visibility</p><h2 id="phTitle">Privacy, stated plainly.</h2></div>
+      <p>Privacy arrives in phases. Here is exactly what stays hidden at each one. Select a platform to compare.</p>
+    </div>
+    <div class="phase-path"><svg id="phasePath" role="group" aria-label="Phase path. Select a phase to highlight it in the table."></svg></div>
+    <div class="ph-ctrl" id="phCtrl" role="group" aria-label="Highlight a phase">
+      <button type="button" data-ph="a" aria-pressed="false">A · Transparent</button>
+      <button type="button" data-ph="b" aria-pressed="true">B · Encrypted orders</button>
+      <button type="button" data-ph="c" aria-pressed="false">C · ZK proofs</button>
+      <button type="button" data-ph="d" aria-pressed="false">D · Shielded funding</button>
+    </div>
+    <div class="spot ph" id="ph">
+      <table>
+        <caption class="sr">What is observable in each phase</caption>
+        <thead><tr><th scope="col">Observable</th>
+          <th scope="col" data-col="a">Phase A<b>Transparent waves</b></th>
+          <th scope="col" data-col="b">Phase B<b>Encrypted orders</b></th>
+          <th scope="col" data-col="c">Phase C<b>ZK proofs</b></th>
+          <th scope="col" data-col="d">Phase D<b>Shielded funding</b></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Your order before the wave trades</th><td data-col="a" class="v">Visible</td><td data-col="b" class="h">Hidden<small>from the public</small></td><td data-col="c" class="h">Hidden</td><td data-col="d" class="h">Hidden</td></tr>
+          <tr><th scope="row">Your swap on the pool</th><td data-col="a" class="h">Combined</td><td data-col="b" class="h">Combined</td><td data-col="c" class="h">Combined</td><td data-col="d" class="h">Combined</td></tr>
+          <tr><th scope="row">Your wallet linked to deposit and payout</th><td data-col="a" class="v">Visible</td><td data-col="b" class="v">Visible</td><td data-col="c" class="v">Visible</td><td data-col="d" class="h">Hidden<small>design TBD</small></td></tr>
+          <tr><th scope="row">Operator can see your order</th><td data-col="a" class="v">Yes</td><td data-col="b" class="v">Yes</td><td data-col="c" class="v">Yes<small>but cannot misreport</small></td><td data-col="d">TBD</td></tr>
+          <tr><th scope="row">Proof the batch was matched correctly</th><td data-col="a">Trust the operator</td><td data-col="b">Trust the operator</td><td data-col="c" class="p">Proven<small>planned</small></td><td data-col="d" class="p">Proven<small>planned</small></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ph-note">Nothing here is live yet. Viewing keys are being researched, and an access and screening policy comes before any launch.</p>
+  </div>
+</section>
+
+<section class="block" id="faq" aria-labelledby="faqTitle">
+  <div class="container faq-wrap">
+    <div class="sec-head center"><div><p class="eyebrow">Questions</p><h2 id="faqTitle">Straight answers.</h2></div><a class="txt-link" href="#docs">Read the full docs<span data-icon="arrow"></span></a></div>
+    <div class="faq" id="faqList">
+      <div class="qa"><h3><button type="button" aria-expanded="false" aria-controls="qa0" id="qb0"><span>Isn't this just a dark pool?</span><i aria-hidden="true"></i></button></h3><div class="qa-a" id="qa0" role="region" aria-labelledby="qb0"><div><p>No. A dark pool runs its own private venue with its own liquidity. Eclipse keeps the liquidity public on Uniswap v4 and only makes the order flow private before it trades.</p></div></div></div>
+      <div class="qa"><h3><button type="button" aria-expanded="false" aria-controls="qa1" id="qb1"><span>Is it a mixer?</span><i aria-hidden="true"></i></button></h3><div class="qa-a" id="qa1" role="region" aria-labelledby="qb1"><div><p>No. It does not pool funds to break the link between deposits and withdrawals. It batches orders for one market and trades only their leftover on a public pool.</p></div></div></div>
+      <div class="qa"><h3><button type="button" aria-expanded="false" aria-controls="qa2" id="qb2"><span>Does it stop MEV?</span><i aria-hidden="true"></i></button></h3><div class="qa-a" id="qa2" role="region" aria-labelledby="qb2"><div><p>It cuts what bots can see. Individual orders are not visible before the wave trades, so there is nothing per-order to front-run or copy. The combined leftover still hits a public pool, so it is not MEV-proof.</p></div></div></div>
+      <div class="qa"><h3><button type="button" aria-expanded="false" aria-controls="qa3" id="qb3"><span>Who can see my order?</span><i aria-hidden="true"></i></button></h3><div class="qa-a" id="qa3" role="region" aria-labelledby="qb3"><div><p>Before the wave trades, the public cannot see buy or sell, or size. In early phases the operator can, and your deposit and payout can still be linked to your wallet until shielded funding ships. The privacy table above shows each phase.</p></div></div></div>
+      <div class="qa"><h3><button type="button" aria-expanded="false" aria-controls="qa4" id="qb4"><span>What if the price moves during a wave?</span><i aria-hidden="true"></i></button></h3><div class="qa-a" id="qa4" role="region" aria-labelledby="qb4"><div><p>Every order has a minimum you will accept. If the wave would fill you below it, your order is dropped, the wave re-matches without it and your funds come back. Try 0.1% slippage on a large order in the demo.</p></div></div></div>
+      <div class="qa"><h3><button type="button" aria-expanded="false" aria-controls="qa5" id="qb5"><span>Is any of this live? Is there a token?</span><i aria-hidden="true"></i></button></h3><div class="qa-a" id="qa5" role="region" aria-labelledby="qb5"><div><p>Not yet. This is a concept prototype under a working name. No contracts are deployed and no proofs, integrations or audits are live. No token is needed for V1. Mainnet waits on security and legal review.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" aria-labelledby="closeTitle">
+  <svg class="big-ap" viewBox="-100 -100 200 200" aria-hidden="true">
+    <circle r="96" fill="none" stroke="rgba(255,255,255,.05)"/>
+    <circle r="74" fill="none" stroke="rgba(255,255,255,.04)" stroke-dasharray="1 4"/>
+    <circle r="56" fill="url(#gCore)" opacity=".9"/>
+    <circle r="56" fill="none" stroke="url(#gRim)" stroke-width=".6" opacity=".7"/>
+    <g transform="scale(.855)"><circle r="65.5" fill="url(#gCres)" mask="url(#mAp)" opacity=".55"/></g>
+  </svg>
+  <div class="container">
+    <h2 id="closeTitle">Public liquidity.<br><span>Private order flow.</span></h2>
+    <p>Trade privately. Settle publicly.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-primary" data-action="try-wave"><span data-icon="wave"></span>Try a Eclipse Wave</button>
+      <a class="btn btn-ghost" href="#docs">Read the docs<span data-icon="arrow"></span></a>
+    </div>
+  </div>
+</section>
+</main>
+<button type="button" class="fab btn btn-primary" data-action="try-wave" id="fab" tabindex="-1" aria-hidden="true"><span data-icon="wave"></span>Try a Eclipse Wave</button>
+
+<div id="docsView" class="docs-view" hidden>
+  <div class="container docs">
+    <aside class="docs-side" aria-label="Documentation">
+      <button class="docs-toggle" id="docsToggle" aria-expanded="false" aria-controls="docsNav"><span>Contents</span><span data-icon="chev"></span></button>
+      <div class="docs-nav" id="docsNav">
+        <label class="docs-search"><span class="sr">Search docs</span><input id="docsSearch" type="search" placeholder="Search docs" autocomplete="off"></label>
+        <div class="dg"><p>Start here</p>
+          <a href="#docs/overview">Overview</a><a href="#docs/model">Mental model</a><a href="#docs/glossary">Glossary</a></div>
+        <div class="dg"><p>Protocol</p>
+          <a href="#docs/lifecycle">Eclipse Wave lifecycle</a><a href="#docs/orders">Order format</a><a href="#docs/matching">Matching &amp; clearing</a><a href="#docs/fills">Partial fills &amp; slippage</a><a href="#docs/settlement">Settlement invariants</a></div>
+        <div class="dg"><p>EclipseHook</p>
+          <a href="#docs/hook">Hook overview</a><a href="#docs/before">beforeSwap checks</a><a href="#docs/after">afterSwap accounting</a><a href="#docs/perms">Permissions</a><a href="#docs/errors">Errors</a><a href="#docs/compat">Pools with another hook</a></div>
+        <div class="dg"><p>Integrate</p>
+          <a href="#docs/arch">Architecture</a><a href="#docs/markets">Markets</a><a href="#docs/sdk">SDK sketch</a></div>
+        <div class="dg"><p>Security</p>
+          <a href="#docs/admin">Admin, pause &amp; upgrades</a><a href="#docs/threats">Threat model</a></div>
+        <div class="dg"><p>Status</p>
+          <a href="#docs/roadmap">Roadmap</a><a href="#docs/disclaimer">Disclaimers</a></div>
+      </div>
+    </aside>
+
+    <article class="docs-body" id="docsBody">
+      <header class="docs-hero">
+        <p class="eyebrow">Documentation · v0.1 draft</p>
+        <h1>Eclipse</h1>
+        <p class="docs-tag">Born from the Hook. Built for private execution.</p>
+        <p class="docs-lede">Uniswap v4 Hooks made market execution programmable. Eclipse extends that capability into a private execution layer: combining private orders, matching them inside a Eclipse Wave, and settling only the remaining imbalance against public liquidity.</p>
+        <div class="callout warn"><span data-icon="warn"></span><div><b>Design draft.</b> Nothing described here is deployed. Contracts, proofs, integrations and audits are not live. Names, parameters and code are illustrative and will change after research.</div></div>
+      </header>
+
+      <section id="d-overview" class="ds">
+        <h2>Overview</h2>
+        <p>Eclipse lets an existing kind of market, a public Uniswap v4 pool, expose a second execution path. Traders who use it submit private orders into a short batch called a <b>Eclipse Wave</b>. Compatible buy and sell orders are matched with each other. Only the difference, the <b>net imbalance</b>, is traded against the pool.</p>
+        <p>The rule the whole design follows:</p>
+        <blockquote>Do not rebuild liquidity. Make existing liquidity privately accessible.</blockquote>
+        <p>Eclipse is protocol infrastructure. <b>Specter</b> is a planned first-party application that would use it, but the protocol must not depend on Specter. Wallets, terminals, launchpads and aggregators should be able to integrate directly.</p>
+      </section>
+
+      <section id="d-model" class="ds">
+        <h2>Mental model</h2>
+        <p>Same pool, two ways in.</p>
+<pre class="dcode"><code><span class="c">PUBLIC MODE</span>
+trader → router → PoolManager.swap → EclipseHook (pass-through) → pool
+
+<span class="c">DARK MODE</span>
+trader → private order → Eclipse Wave → match → net
+       → Eclipse Executor → PoolManager.swap → EclipseHook (verify) → pool
+       → settlement</code></pre>
+        <p>Eclipse is <b>not</b> a mixer, a separate AMM, a new liquidity pool, a general privacy wallet or a new proof system.</p>
+      </section>
+
+      <section id="d-glossary" class="ds">
+        <h2>Glossary</h2>
+        <div class="dt"><table>
+          <tr><th>Eclipse Wave</th><td>A discrete batch window. Orders accumulate while it is open, lock at cutoff, then match, execute and settle together.</td></tr>
+          <tr><th>Commitment</th><td>A hash that binds an order's terms without revealing them before execution.</td></tr>
+          <tr><th>Internal match</th><td>Buy and sell volume inside one wave that offsets each other and never touches the pool.</td></tr>
+          <tr><th>Net imbalance</th><td>What is left after internal matching. The only amount that trades against public liquidity.</td></tr>
+          <tr><th>Eclipse Executor</th><td>The contract that submits a wave's net trade to the PoolManager.</td></tr>
+          <tr><th>EclipseHook</th><td>The v4 hook on the pool that verifies dark executions and records their results.</td></tr>
+          <tr><th>Settlement root</th><td>A commitment to every user's final output for a wave.</td></tr>
+          <tr><th>Netting efficiency</th><td>Internally matched volume divided by gross private volume.</td></tr>
+        </table></div>
+      </section>
+
+      <section id="d-lifecycle" class="ds">
+        <h2>Eclipse Wave lifecycle</h2>
+        <div class="states"><span>OPEN</span><span>LOCKED</span><span>MATCHING</span><span>PROVING</span><span>EXECUTING</span><span>SETTLING</span><span>SETTLED</span><span class="f">FAILED</span></div>
+        <p>While a wave is <code>OPEN</code>, orders accumulate. At cutoff the wave becomes <code>LOCKED</code> and no order can join or leave. Matching, proving, execution and settlement follow.</p>
+        <p>Wave length is a trade-off. Short waves feel faster but have a smaller privacy set. Long waves gather more orders but add latency and price movement. Research targets are 15, 30, 60 and 120 seconds, with 30 to 60 seconds as a testnet starting point. The demo on this site uses 30 second waves with accelerated settlement.</p>
+        <div class="callout"><span data-icon="info"></span><div>Never publish gross buy or sell imbalance, net direction or large-order presence before a wave executes. Only post-execution statistics are public.</div></div>
+      </section>
+
+      <section id="d-orders" class="ds">
+        <h2>Order format</h2>
+        <div class="dt"><table>
+          <thead><tr><th>Field</th><th>Visibility (target)</th></tr></thead>
+          <tr><th><code>commitment</code>, <code>waveId</code>, expiry class</th><td>Public</td></tr>
+          <tr><th><code>tokenIn</code> / <code>tokenOut</code>, <code>amountIn</code></th><td>Encrypted</td></tr>
+          <tr><th><code>minAmountOut</code></th><td>Encrypted, always required</td></tr>
+          <tr><th>owner, <code>nonce</code></th><td>Encrypted</td></tr>
+        </table></div>
+<pre class="dcode"><code><span class="c">// illustrative only, final scheme chosen by the cryptography engineer</span>
+commitment = Hash(poolId, tokenIn, tokenOut, amountIn,
+                  minAmountOut, expiry, nonce, ownerSecret, randomness)</code></pre>
+        <p>Authorization must prove the user created the order, owns the funds, and that the order is unexpired, not replayed and unmodified. V1 can use an EIP-712 intent signature plus encrypted transport before full shielded ownership.</p>
+      </section>
+
+      <section id="d-matching" class="ds">
+        <h2>Matching &amp; clearing</h2>
+        <p>Matching is deterministic. There is no operator discretion over who fills or at what price. Candidate price policies still under evaluation:</p>
+        <ul class="dl"><li><b>A</b> · Uniswap execution price reference</li><li><b>B</b> · midpoint from an oracle or external reference</li><li><b>C</b> · batch clearing price</li><li><b>D</b> · VWAP from external execution</li></ul>
+        <p>The demo uses an illustrative model: matched volume clears at a simulated mid, and the net side shares the pool's price impact pro-rata. Every wave must reconcile:</p>
+<pre class="dcode"><code>BUY − SELL = NET        <span class="c">// subject to fees and price conversion</span>
+gross = matched_buy + matched_sell + net</code></pre>
+      </section>
+
+      <section id="d-fills" class="ds">
+        <h2>Partial fills &amp; slippage</h2>
+        <p>If not all volume can execute, the default is a pro-rata fill:</p>
+<pre class="dcode"><code>userFill = userRequested × totalFilled / totalRequested</code></pre>
+        <p>Every order carries <code>minAmountOut</code> or a maximum price. If the aggregate execution would violate it, that order is not filled. The wave removes it, re-nets, re-proves and executes the remaining valid orders. You can trigger this in the demo terminal by setting 0.1% slippage on a large order.</p>
+      </section>
+
+      <section id="d-settlement" class="ds">
+        <h2>Settlement invariants</h2>
+<pre class="dcode"><code>total user inputs = internal matched inputs + external execution inputs
+                  + fees + refund / remainder
+total outputs credited = actual outputs received</code></pre>
+        <p>No synthetic balance creation. Every order, wave, settlement root and proof is replay-protected: a wave settles once and an order is consumed once.</p>
+      </section>
+
+      <section id="d-hook" class="ds">
+        <h2>EclipseHook</h2>
+        <p>EclipseHook is the enforcement gateway between private order flow and public Uniswap v4 liquidity. It is attached to the pool when the pool is initialized. Every swap in that pool calls it, which is what lets the pool serve two paths on one liquidity source.</p>
+        <div class="paths">
+          <div><h4>Public path</h4><p>No Eclipse data in <code>hookData</code>. The hook returns immediately and the swap behaves like any v4 swap.</p></div>
+          <div><h4>Eclipse path</h4><p>The Eclipse Executor passes the wave reference in <code>hookData</code>. <code>beforeSwap</code> verifies it, the pool fills it, <code>afterSwap</code> records the result.</p></div>
+        </div>
+        <div class="callout"><span data-icon="info"></span><div>The hook does not provide privacy by itself. Privacy comes from the order layer in front of it. The hook makes the eclipse path trust-minimized and enforceable on-chain.</div></div>
+      </section>
+
+      <section id="d-before" class="ds">
+        <h2>beforeSwap checks</h2>
+        <div class="dt"><table>
+          <thead><tr><th>Check</th><th>Reverts with</th></tr></thead>
+          <tr><th>Caller is the registered Eclipse Executor</th><td><code>NotDarkExecutor()</code></td></tr>
+          <tr><th>Pool is registered for Eclipse</th><td><code>PoolNotRegistered()</code></td></tr>
+          <tr><th>Wave is locked and not yet settled</th><td><code>WaveAlreadySettled(waveId)</code></td></tr>
+          <tr><th>Commitment root matches the locked wave</th><td><code>RootMismatch()</code></td></tr>
+          <tr><th>Swap amount equals the proven net imbalance</th><td><code>AmountMismatch(expected, got)</code></td></tr>
+          <tr><th>Execution deadline has not passed</th><td><code>DeadlineExpired()</code></td></tr>
+        </table></div>
+        <p>Never trust <code>hookData</code> blindly. Every field it carries is checked against state the hook already holds.</p>
+      </section>
+
+      <section id="d-after" class="ds">
+        <h2>afterSwap accounting</h2>
+        <p>On the eclipse path, <code>afterSwap</code> captures the actual swap delta, marks the wave as executed, takes the Eclipse fee and emits the data the public proof page reads.</p>
+<pre class="dcode"><code><span class="k">function</span> <span class="f">afterSwap</span>(..., BalanceDelta delta, <span class="k">bytes calldata</span> hookData)
+    <span class="k">external</span> onlyPoolManager <span class="k">returns</span> (<span class="k">bytes4</span>, <span class="k">int128</span>)
+{
+    <span class="k">if</span> (hookData.length == 0) <span class="k">return</span> (selector, 0);   <span class="c">// public path</span>
+    Wave <span class="k">storage</span> w = waves[waveId];
+    w.state  = EXECUTED;
+    w.result = delta;
+    <span class="k">int128</span> fee = _fee(delta, FEE_BPS);             <span class="c">// via afterSwapReturnDelta</span>
+    <span class="k">emit</span> <span class="f">DarkWaveExecuted</span>(waveId, delta, w.commitmentRoot);
+    <span class="k">return</span> (selector, fee);
+}</code></pre>
+      </section>
+
+      <section id="d-perms" class="ds">
+        <h2>Permissions</h2>
+        <p>In v4 a hook's permissions are encoded in the low bits of its address and fixed for the pool's lifetime. Proposed set:</p>
+        <div class="dt"><table>
+          <thead><tr><th>Flag</th><th>Used</th><th>Why</th></tr></thead>
+          <tr><th><code>beforeInitialize</code></th><td class="on">Yes</td><td>Only allow pools created through the Eclipse registry</td></tr>
+          <tr><th><code>beforeSwap</code></th><td class="on">Yes</td><td>Verify dark executions</td></tr>
+          <tr><th><code>afterSwap</code></th><td class="on">Yes</td><td>Record results, emit proof data</td></tr>
+          <tr><th><code>afterSwapReturnDelta</code></th><td class="on">Yes</td><td>Take the Eclipse fee from output</td></tr>
+          <tr><th>Liquidity and donate hooks</th><td>No</td><td>LPs use the pool exactly like any v4 pool</td></tr>
+        </table></div>
+      </section>
+
+      <section id="d-errors" class="ds">
+        <h2>Errors</h2>
+        <p>A revert means the swap never happened: no balances move and the wave can be retried or failed safely.</p>
+        <div class="dt"><table>
+          <tr><th><code>NotDarkExecutor()</code></th><td>Someone other than the Eclipse Executor tried the eclipse path.</td></tr>
+          <tr><th><code>PoolNotRegistered()</code></th><td>The pool is not enabled for Eclipse.</td></tr>
+          <tr><th><code>WaveAlreadySettled(waveId)</code></th><td>Replay of an executed wave.</td></tr>
+          <tr><th><code>RootMismatch()</code></th><td>The commitment root differs from the locked wave.</td></tr>
+          <tr><th><code>AmountMismatch(expected, got)</code></th><td>The trade size differs from the proven net imbalance.</td></tr>
+          <tr><th><code>DeadlineExpired()</code></th><td>The execution window closed.</td></tr>
+        </table></div>
+      </section>
+
+      <section id="d-compat" class="ds">
+        <h2>Pools with another hook</h2>
+        <p>A v4 pool has exactly one hook, chosen at initialization. A pool that already runs a different hook, such as a graduated Pons pool, cannot add EclipseHook later.</p>
+        <p>For those pools the plan is an <b>executor-only route</b>: the Eclipse Executor performs the same checks before calling the pool, and the pool's own hook stays untouched. No liquidity migration is required, but enforcement lives in the executor rather than at pool level. V1 supports graduated Pons tokens only, never the pre-graduation bonding curve.</p>
+      </section>
+
+      <section id="d-arch" class="ds">
+        <h2>Architecture</h2>
+        <div class="dt"><table>
+          <thead><tr><th>Layer</th><th>Role</th></tr></thead>
+          <tr><th>Applications</th><td>Submit orders. Specter (planned first-party app), wallets, trading terminals, launchpads and aggregators.</td></tr>
+          <tr><th>Eclipse</th><td>Coordinates private execution: order gateway, Eclipse Wave scheduler, deterministic matcher, Eclipse Executor and settlement receipts.</td></tr>
+          <tr><th>Uniswap v4 + EclipseHook</th><td>Public liquidity, price discovery and swap execution. The hook enforces the eclipse path on the pool.</td></tr>
+        </table></div>
+        <p><b>Specter</b> is a planned first-party application for private balances and portfolios, with the line "Your portfolio shouldn't be public." When a Specter user trades, the order routes through Eclipse. The protocol is designed to work without it.</p>
+      </section>
+
+      <section id="d-markets" class="ds">
+        <h2>Markets</h2>
+        <p>Netting improves when orders share a wave, so V1 targets one to three liquid markets rather than many thin ones.</p>
+        <div class="dt"><table>
+          <thead><tr><th>Market</th><th>Route</th><th>Status</th></tr></thead>
+          <tr><th>WETH / USDG</th><td>v4 pool with EclipseHook</td><td>In this demo, simulated</td></tr>
+          <tr><th>Graduated Pons token</th><td>Existing Pons pool, executor route</td><td>Planned</td></tr>
+          <tr><th>NVDA / USDG</th><td>Stock Token market</td><td>Research, gated on legal review</td></tr>
+        </table></div>
+      </section>
+
+      <section id="d-sdk" class="ds">
+        <h2>SDK sketch</h2>
+<pre class="dcode"><code><span class="k">import</span> { DarkMode } <span class="k">from</span> <span class="s">'@eclipse/sdk'</span>   <span class="c">// not published</span>
+
+<span class="k">const</span> order = <span class="k">await</span> darkMode.<span class="f">createOrder</span>({
+  pool, tokenIn: <span class="s">'USDG'</span>, tokenOut: <span class="s">'WETH'</span>,
+  amountIn: <span class="s">'10000'</span>, minAmountOut,
+})
+<span class="k">const</span> receipt = <span class="k">await</span> darkMode.<span class="f">submit</span>(order)
+<span class="c">// → { waveId, commitment, status: 'queued' }</span></code></pre>
+        <p>Frontends must not send wallet, pair, amount, direction, order id or recipient to ordinary analytics providers.</p>
+      </section>
+
+      <section id="d-admin" class="ds">
+        <h2>Admin, pause &amp; upgrades</h2>
+        <div class="paths">
+          <div><h4>Admin can (2-of-3 multisig)</h4><ul class="dl"><li>Register supported pools</li><li>Pause new dark orders</li><li>Update bounded fee parameters</li><li>Add a verifier version or execution adapter</li></ul></div>
+          <div><h4>Admin cannot</h4><ul class="dl"><li>Steal user funds</li><li>Change a settled wave or rewrite an order</li><li>Forge a valid proof</li><li>Redirect user output</li></ul></div>
+        </div>
+        <p>Pause blocks new orders and new waves. It never blocks settlement of already locked valid waves, refunds or user exit. Prefer versioned deployments (EclipseHook V1, V2…) over silent upgrades. If upgradeability is required: multisig, timelock and public notice.</p>
+      </section>
+
+      <section id="d-threats" class="ds">
+        <h2>Threat model</h2>
+        <p>Each actor needs a written answer for what they know, what they can do, what they cannot do, the worst case and the mitigation.</p>
+        <div class="dt"><table>
+          <thead><tr><th>Actor</th><th>Ideal failure mode</th></tr></thead>
+          <tr><th>Matcher</th><td>Cannot choose prices or favour users; cannot steal funds</td></tr>
+          <tr><th>Relayer</th><td>Can delay, cannot change orders, recipients or minimums</td></tr>
+          <tr><th>Executor</th><td>Cannot exceed the proven net; the hook rejects it</td></tr>
+          <tr><th>MEV searcher</th><td>Sees only post-execution aggregates</td></tr>
+          <tr><th>Admin</th><td>Bounded powers, see above</td></tr>
+          <tr><th>Chain observer</th><td>Sees one aggregate trade per wave, plus deposits and payouts until funding is shielded</td></tr>
+        </table></div>
+        <p>Open questions before mainnet: can the operator map wallet to order, can the relayer correlate IPs, can an observer infer users from timing, can a user self-submit, and can a user exit if the service disappears. These answers decide every marketing claim.</p>
+      </section>
+
+      <section id="d-roadmap" class="ds">
+        <h2>Roadmap</h2>
+        <ol class="road">
+          <li><b>0 · Research</b>Threat model, hook design, matching model, ZK stack decision, pool matrix</li>
+          <li><b>1 · Transparent batch prototype</b>Waves, matching, netting and v4 execution, all visible</li>
+          <li><b>2 · Encrypted order layer</b>Commitments and private gateway</li>
+          <li><b>3 · EclipseHook</b>Executor authorization, wave validation, execution recording</li>
+          <li><b>4 · ZK batch proof</b>Valid orders, correct netting, correct batch</li>
+          <li><b>5 · Private settlement</b>Settlement commitments and claim proofs, if needed</li>
+          <li><b>6–9 · Specter, SDK, Pons, Stock Tokens</b>Integrations, gated by legal review</li>
+          <li><b>10 · External security review</b>Contracts, circuits, matcher, relayer, privacy</li>
+        </ol>
+      </section>
+
+      <section id="d-disclaimer" class="ds">
+        <h2>Disclaimers</h2>
+        <p>This is a concept prototype and working name. No contracts are deployed and no ZK verification, integration or audit is live. All prices, waves and balances on this site are simulated. Private execution and securities-linked assets raise market-structure, securities, AML and sanctions questions that require legal review before any mainnet launch. Nothing here is an offer of a product or service.</p>
+        <p class="docs-back"><a class="btn btn-ghost btn-sm" href="#hook">Back to the hook demo<span data-icon="arrow"></span></a></p>
+      </section>
+    </article>
+  </div>
+</div>
+
+
+<footer>
+  <div class="container foot">
+    <div class="foot-b"><a class="brand" href="#top"><img src="/logo-eclipse.png" srcset="/logo-eclipse.png 1x, /logo-eclipse@2x.png 2x" width="26" height="26" alt="" aria-hidden="true" class="brand-logo"><span>Eclipse</span><small>App</small></a><p class="foot-tag">Born from the Hook. Built for private execution.</p></div>
+    <p>Concept prototype for a private execution layer on Uniswap v4. Working name. No contracts are deployed, and no integrations, audits or ZK verification are live. Prices, waves and balances are simulated and reset on reload. Not an offer of any product or service.</p>
+    <nav class="foot-links" aria-label="Footer"><a href="#hook">Hook</a><a href="#waves">Waves</a><a href="#privacy">Privacy</a><a href="#docs">Docs</a></nav>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dwTitle" hidden>
+  <div class="dw-head">
+    <div><p class="eyebrow">Wave receipt · simulated</p><h2 id="dwTitle">Eclipse Wave</h2></div>
+    <button class="icon-btn" id="dwClose" aria-label="Close wave details"><span data-icon="close"></span></button>
+  </div>
+  <div class="dw-body" id="dwBody"></div>
+</aside>

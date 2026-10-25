@@ -1,0 +1,11 @@
+[workspace]
+members = ["lib", "program", "script"]
+resolver = "2"
+
+[workspace.dependencies]
+serde = { version = "1.0", default-features = false, features = ["derive", "alloc"] }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+alloy-sol-types = { version = "0.8", default-features = false }
+tiny-keccak = { version = "2.0", features = ["keccak"] }
+sha2 = "0.10"
+hex = "0.4"

@@ -1,0 +1,28 @@
+{
+  "name": "@eclipse/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for Eclipse Protocol - Dark pool batch execution on Uniswap v4",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "eclipse",
+    "dark-pool",
+    "mev-protection",
+    "uniswap-v4",
+    "zero-knowledge",
+    "specter"
+  ],
+  "author": "Eclipse Protocol Core Devs",
+  "license": "MIT",
+  "peerDependencies": {
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "viem": "^2.57.11"
+  }
+}

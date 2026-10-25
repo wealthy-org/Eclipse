@@ -1,0 +1,22 @@
+{
+  "name": "eclipse-matcher",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "tsx src/migrate.ts",
+    "sync": "tsx src/sync.ts",
+    "match": "tsx src/match.ts",
+    "daemon": "tsx src/daemon.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "postgres": "^3.4.4",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "@types/node": "^20.14.0"
+  }
+}

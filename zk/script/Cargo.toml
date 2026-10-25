@@ -1,0 +1,27 @@
+[package]
+name = "eclipse-zk-script"
+version = "0.1.0"
+edition = "2021"
+default-run = "prove_batch"
+
+[[bin]]
+name = "prove_batch"
+path = "src/bin/main.rs"
+
+[[bin]]
+name = "vkey"
+path = "src/bin/vkey.rs"
+
+[dependencies]
+sp1-sdk = { version = "6.0.1", features = ["blocking", "native-gnark"] }
+serde_json = { workspace = true }
+serde = { workspace = true }
+clap = { version = "4.0", features = ["derive", "env"] }
+tracing = "0.1.40"
+hex = { workspace = true }
+alloy-sol-types = { workspace = true }
+eclipse-zk-lib = { path = "../lib" }
+dotenv = "0.15.0"
+
+[build-dependencies]
+sp1-build = { version = "6.0.1" }
