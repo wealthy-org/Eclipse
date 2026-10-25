@@ -6,6 +6,7 @@
 import { sql } from "./db.js";
 import { walletClient, publicClient, ECLIPSE_ORDER_REGISTRY_ADDRESS, ECLIPSE_HOOK_ADDRESS, MOCK_WETH_ADDRESS, MOCK_USDG_ADDRESS } from "./chain.js";
 import { ORDER_REGISTRY_ABI, ECLIPSE_HOOK_ABI } from "./abi.js";
+import { generateAndVerifyBatchProof } from "./proverBridge.js";
 
 interface DbOrder {
   order_id: string;
@@ -92,6 +93,9 @@ export async function runNetImbalanceSettlement(): Promise<number> {
         status = 'locked',
         updated_at = now()
     `;
+
+    // Trigger SP1 zkVM Batch Prover for cryptographic wave verification
+    void generateAndVerifyBatchProof(waveId, poolId, open);
   } catch (err) {
     console.warn(`[Netting DB Warning] Could not upsert into waves table:`, err);
   }

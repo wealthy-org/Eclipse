@@ -44,6 +44,7 @@ export default function Terminal({ market }: { market: Market }) {
   const [result, setResult] = useState<{ out: number; min: number; root: string; tx: string; onchain?: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [minting, setMinting] = useState(false);
   const toastTimer = useRef<number | undefined>(undefined);
 
   function showToast(msg: string) {
@@ -247,7 +248,47 @@ export default function Terminal({ market }: { market: Market }) {
       <div className="field">
         <div className="f-top">
           <label>You pay</label>
-          <span className="bal">Balance <span className="mono">{canTradeOnChain ? fmtBal(payBalance as bigint | undefined) : "–"}</span></span>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            {canTradeOnChain && (
+              <button
+                type="button"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (!address || minting) return;
+                  setMinting(true);
+                  try {
+                    const res = await fetch("/api/faucet", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ address, symbol: payToken }),
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || "Faucet failed");
+                    showToast(`Dispensed ${data.amount} to your wallet!`);
+                    void refetchPayBalance();
+                  } catch (err: any) {
+                    showToast(`Faucet error: ${err.message}`);
+                  } finally {
+                    setMinting(false);
+                  }
+                }}
+                disabled={minting}
+                style={{
+                  background: "rgba(167, 139, 250, 0.12)",
+                  color: "var(--violet-pale)",
+                  border: "1px solid rgba(167, 139, 250, 0.3)",
+                  borderRadius: 4,
+                  padding: "2px 8px",
+                  fontSize: 10,
+                  fontWeight: 600,
+                  cursor: minting ? "not-allowed" : "pointer",
+                }}
+              >
+                {minting ? "Minting..." : `+ Faucet ${payToken}`}
+              </button>
+            )}
+            <span className="bal">Balance <span className="mono">{canTradeOnChain ? fmtBal(payBalance as bigint | undefined) : "–"}</span></span>
+          </div>
         </div>
         <div className="f-main">
           <input
