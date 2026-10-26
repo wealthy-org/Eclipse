@@ -9,7 +9,7 @@ const SETTLE_MS = 2_500;
 type Phase = "open" | "settling";
 
 export default function WaveHud() {
-  const [id, setId] = useState<number>(219);
+  const [id, setId] = useState<number>(2030);
   const [phase, setPhase] = useState<Phase>("open");
   const [msLeft, setMsLeft] = useState(WAVE_MS);
 
@@ -27,7 +27,7 @@ export default function WaveHud() {
             params: [
               {
                 to: "0xA697AD15EB193c7e23c4208606587c2FEfDf92ad",
-                data: "0xec26ad50", // currentWaveId()
+                data: "0xc82335c5", // currentWaveId() selector
               },
               "latest",
             ],
