@@ -1,7 +1,16 @@
 import { NextResponse } from "next/server";
 import { sql } from "../../lib/db";
 
+let cachedWaves: any = null;
+let lastWavesCacheTime = 0;
+const WAVES_CACHE_TTL = 10_000; // 10 seconds cache
+
 export async function GET() {
+  const now = Date.now();
+  if (cachedWaves && now - lastWavesCacheTime < WAVES_CACHE_TTL) {
+    return NextResponse.json({ success: true, waves: cachedWaves });
+  }
+
   try {
     const rows = await sql`
       select 
@@ -13,27 +22,32 @@ export async function GET() {
       limit 25
     `;
 
+    const mapped = rows.map((r: any) => ({
+      id: Number(r.wave_id),
+      poolId: r.pool_id,
+      market: "WETH / USDG",
+      orders: Array.isArray(r.order_ids) ? r.order_ids.length : 0,
+      grossVolume: Number(r.gross_buy) + Number(r.gross_sell),
+      internalMatched: Number(r.internal_matched),
+      netPublic: Number(r.net_amount),
+      nettingEfficiency:
+        Number(r.gross_buy) + Number(r.gross_sell) > 0
+          ? Number(r.internal_matched) / (Number(r.gross_buy) + Number(r.gross_sell))
+          : 0.78,
+      state: r.status === "executed" || r.status === "settled" ? "settled" : r.status || "settled",
+      settlementRoot: r.commitment_root || "0x2567a8d44144045c100f137c7fa8ce374e4a9e37...",
+      executionTx: r.execution_tx_hash || r.lock_tx_hash || null,
+      lockTx: r.lock_tx_hash || null,
+      zkProofStatus: "zkVM Groth16 Proved",
+      createdAt: r.created_at,
+    }));
+
+    cachedWaves = mapped;
+    lastWavesCacheTime = now;
+
     return NextResponse.json({
       success: true,
-      waves: rows.map((r: any) => ({
-        id: Number(r.wave_id),
-        poolId: r.pool_id,
-        market: "WETH / USDG",
-        orders: Array.isArray(r.order_ids) ? r.order_ids.length : 0,
-        grossVolume: Number(r.gross_buy) + Number(r.gross_sell),
-        internalMatched: Number(r.internal_matched),
-        netPublic: Number(r.net_amount),
-        nettingEfficiency:
-          Number(r.gross_buy) + Number(r.gross_sell) > 0
-            ? Number(r.internal_matched) / (Number(r.gross_buy) + Number(r.gross_sell))
-            : 0.78,
-        state: r.status === "executed" || r.status === "settled" ? "settled" : r.status || "settled",
-        settlementRoot: r.commitment_root || "0x2567a8d44144045c100f137c7fa8ce374e4a9e37...",
-        executionTx: r.execution_tx_hash || r.lock_tx_hash || null,
-        lockTx: r.lock_tx_hash || null,
-        zkProofStatus: "zkVM Groth16 Proved",
-        createdAt: r.created_at,
-      })),
+      waves: mapped,
     });
   } catch (err: any) {
     console.error("[API Waves Error]:", err);

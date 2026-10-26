@@ -2,8 +2,10 @@ import { syncOrders } from "./syncCore.js";
 import { runCommitmentAutoReveal } from "./revealCore.js";
 import { runMatching } from "./matchCore.js";
 import { runNetImbalanceSettlement } from "./nettingCore.js";
+import { runDatabaseCleanup } from "./cleanupCore.js";
 
 const POLL_INTERVAL_MS = parseInt(process.env.POLL_INTERVAL_MS ?? "15000", 10);
+let cycleCount = 0;
 
 let running = true;
 
@@ -36,6 +38,13 @@ async function tick() {
     if (revealedCount > 0 || matchedCount > 0 || nettedCount > 0) {
       console.log("[Daemon] Step 5: Refreshing status post-settlement...");
       await syncOrders();
+    }
+
+    // Step 6: NeonDB Free Tier prune routine (runs roughly every 50 cycles ~ 12 minutes)
+    cycleCount++;
+    if (cycleCount % 50 === 0) {
+      console.log("[Daemon] Step 6: Pruning old stale data to conserve NeonDB free quota...");
+      await runDatabaseCleanup();
     }
   } catch (err) {
     console.error("[Daemon] Error in cycle:", err);
