@@ -61,7 +61,7 @@ export const MARKETS: Market[] = [
     pair: "NVDA / USDG",
     base: "NVDA",
     quote: "USDG",
-    venue: "Securities Stock Token · Phase 9",
+    venue: "Tokenized Equity · 24/7 Dark Pool",
     status: "live",
     note: "Robinhood Chain Testnet · zkVM Proved",
     price: "138.25",
@@ -127,10 +127,10 @@ export const PROTOCOL_STATS = {
 };
 
 export const PRIVACY_PHASES = [
-  { id: "a", label: "Phase A", title: "Transparent waves" },
-  { id: "b", label: "Phase B", title: "Encrypted orders" },
-  { id: "c", label: "Phase C", title: "ZK proofs" },
-  { id: "d", label: "Phase D", title: "Shielded funding" },
+  { id: "a", label: "Layer 1", title: "Batch Auctions" },
+  { id: "b", label: "Layer 2", title: "Encrypted Orders" },
+  { id: "c", label: "Layer 3", title: "ZK Validity Proofs" },
+  { id: "d", label: "Layer 4", title: "Shielded Settlements" },
 ] as const;
 
 export const PRIVACY_ROWS: {

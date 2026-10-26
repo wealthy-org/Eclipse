@@ -60,7 +60,7 @@ export default function PrivacyPage() {
               Compare what public mempool searchers see versus what Eclipse reveals on Robinhood Chain testnet.
             </span>
           </div>
-          <span className="badge live" style={{ fontSize: 11, padding: "2px 8px" }}>Phase 2 Active Protection</span>
+          <span className="badge live" style={{ fontSize: 11, padding: "2px 8px" }}>Active Shielded Protection</span>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
@@ -125,7 +125,7 @@ export default function PrivacyPage() {
 
       <p className="ph-note">
         Viewing keys are being researched, and an access and screening policy comes before any launch. See the
-        Phase 0 threat model for the privacy questions this still needs to answer.
+        protocol architecture specifications for the privacy questions this still needs to answer.
       </p>
     </div>
   );

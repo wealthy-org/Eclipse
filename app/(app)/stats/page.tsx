@@ -168,7 +168,7 @@ export default function StatsPage() {
     },
     {
       pair: "NVDA / USDG",
-      venue: "Securities Stock Token · Phase 9",
+      venue: "Tokenized Equity · 24/7 Dark Pool",
       darkVol: "$520K",
       netShare: "68.4%",
       mevSaved: "$10,400",

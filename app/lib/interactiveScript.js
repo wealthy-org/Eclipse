@@ -1212,10 +1212,10 @@ new IntersectionObserver(es => originEl.classList.toggle('inview', es[0].isInter
 (function buildPhasePath() {
   const svg = $('#phasePath'), k = isoKit(1.9, 0, 0), W0 = 46, H0 = 10;
   const PL = [
-    { ph: 'a', x: 0, y: 0, n: 'Phase A', t: 'Transparent waves' },
-    { ph: 'b', x: 96, y: -44, n: 'Phase B', t: 'Encrypted orders' },
-    { ph: 'c', x: 182, y: -124, n: 'Phase C', t: 'Validity proofs' },
-    { ph: 'd', x: 276, y: -168, n: 'Phase D', t: 'Shielded funding' }
+    { ph: 'a', x: 0, y: 0, n: 'Layer 1', t: 'Batch Auctions' },
+    { ph: 'b', x: 96, y: -44, n: 'Layer 2', t: 'Encrypted Orders' },
+    { ph: 'c', x: 182, y: -124, n: 'Layer 3', t: 'ZK Validity Proofs' },
+    { ph: 'd', x: 276, y: -168, n: 'Layer 4', t: 'Shielded Funding' }
   ];
   const c = p => [p.x + W0 / 2, p.y + W0 / 2, 0];
   const route = [];
