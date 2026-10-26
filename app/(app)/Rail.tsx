@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IcHome, IcMarkets, IcWaves, IcStats, IcPrivacy, IcIntegrate } from "./icons";
+import { IcHome, IcMarkets, IcWaves, IcStats, IcPrivacy, IcIntegrate, IcTwitterX } from "./icons";
 import { WalletRailButton } from "./WalletButton";
 
 const ITEMS = [
@@ -34,6 +34,17 @@ export default function Rail() {
         })}
       </ul>
       <div className="rail-bottom">
+        <a
+          href="https://x.com/eclipsehook"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rail-item"
+          style={{ marginBottom: "8px" }}
+          aria-label="Eclipse on X (Twitter)"
+        >
+          <IcTwitterX className="rail-ic" />
+          <span className="rail-tip">Twitter @eclipsehook</span>
+        </a>
         <WalletRailButton />
       </div>
     </nav>

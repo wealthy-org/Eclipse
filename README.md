@@ -4,9 +4,10 @@
 [![Uniswap v4 Hook](https://img.shields.io/badge/Uniswap_v4-Hook_Enabled-ff007a?style=flat-square)](https://github.com/Uniswap/v4-core)
 [![zkVM Verified](https://img.shields.io/badge/ZK-zkVM_Groth16-83e8c0?style=flat-square)]()
 [![TypeScript SDK](https://img.shields.io/badge/SDK-%40eclipse%2Fsdk-3178c6?style=flat-square)](https://github.com/wealthy-org/Eclipse/tree/main/packages/sdk)
+[![Twitter/X](https://img.shields.io/badge/Twitter-@eclipsehook-000000?style=flat-square&logo=x)](https://x.com/eclipsehook)
 
 > **Private while it forms. Public once it settles.**  
-> Eclipse is an institutional-grade dark pool and confidential batch auction protocol built on Robinhood Chain Testnet. It shields large trades from toxic MEV and public mempool front-running through zero-knowledge verifiable netting, settling residual imbalances through native Uniswap v4 liquidity hooks.
+> Eclipse is an institutional-grade dark pool and confidential batch auction protocol built on Robinhood Chain Testnet. It shields large trades from toxic MEV and public mempool front-running through zero-knowledge verifiable netting, settling residual imbalances through native Uniswap v4 liquidity hooks. Follow [@eclipsehook](https://x.com/eclipsehook) for updates.
 
 ---
 
