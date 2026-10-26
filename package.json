@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:demo": "npx tsx scripts/stream-tests.ts",
+    "zk:demo": "npx tsx scripts/stream-zk.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.104.5",
