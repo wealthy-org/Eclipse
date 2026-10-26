@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { IcArrow } from "../icons";
+import FaucetSandbox from "./FaucetSandbox";
 
 const INTEGRATORS = ["Wallets", "Trading terminals", "Launchpads", "Aggregators", "Trading bots", "Portfolio managers"];
 
@@ -74,6 +75,9 @@ export default function IntegratePage() {
           </div>
         </div>
       </div>
+
+      {/* Interactive Faucet & Asset Sandbox */}
+      <FaucetSandbox />
     </div>
   );
 }
