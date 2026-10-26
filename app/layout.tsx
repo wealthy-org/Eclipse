@@ -19,7 +19,13 @@ export const metadata: Metadata = {
     "Born from the Hook. Built for private execution. Eclipse is a private execution layer for Uniswap v4: concept prototype with simulated Eclipse Waves.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+
   return (
     <html
       lang="en"
