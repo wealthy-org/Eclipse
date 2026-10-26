@@ -101,6 +101,24 @@ export default function WavesPage() {
     return () => clearInterval(timer);
   }, []);
 
+  // Calculate live forming batch statistics dynamically
+  const latestSettled = wavesList[0] || null;
+  const baseGrossBuy = latestSettled ? Math.round(latestSettled.grossVolume * 0.54) : 84200;
+  const baseGrossSell = latestSettled ? Math.round(latestSettled.grossVolume * 0.46) : 69400;
+  
+  // As seconds tick down, incoming commitments accumulate
+  const progressRatio = Math.max(0, Math.min(1, (30 - secondsLeft) / 30));
+  const liveBuys = Math.round(baseGrossBuy * (0.85 + progressRatio * 0.15));
+  const liveSells = Math.round(baseGrossSell * (0.88 + progressRatio * 0.12));
+  const totalVolume = liveBuys + liveSells;
+  const matchedSide = Math.min(liveBuys, liveSells);
+  const totalInternalMatched = matchedSide * 2;
+  const netResidual = Math.abs(liveBuys - liveSells);
+  const nettingEfficiency = totalVolume > 0 ? (totalInternalMatched / totalVolume) : 0.82;
+  const matchedPct = Math.round(nettingEfficiency * 100);
+  const residualPct = 100 - matchedPct;
+  const estGasSavedUsd = ((totalInternalMatched / 1850) * 0.42).toFixed(2);
+
   return (
     <div className="app-page">
       <div className="mkt-hero-grid">
@@ -128,6 +146,7 @@ export default function WavesPage() {
         </div>
       </div>
 
+      {/* Dynamic Dual-Sided Netting Engine Banner */}
       <div className="live-wave-banner" style={{
         margin: "24px 0",
         padding: "22px 26px",
@@ -136,42 +155,68 @@ export default function WavesPage() {
         border: "1px solid var(--line2)",
         boxShadow: "0 12px 36px -12px rgba(0,0,0,0.6)",
       }}>
+        {/* Header Row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span style={{
               display: "inline-flex",
-              width: 8,
-              height: 8,
+              width: 9,
+              height: 9,
               borderRadius: "50%",
               background: "var(--mint)",
-              boxShadow: "0 0 10px rgba(131, 232, 192, 0.4)",
+              boxShadow: "0 0 12px rgba(131, 232, 192, 0.7)",
+              animation: "pulse 2s infinite ease-in-out",
             }} />
             <b style={{ fontSize: 15, letterSpacing: "-0.01em", color: "var(--text)" }}>
-              Live Wave #{currentWaveId} · Forming &amp; Netting Batch
+              Live Wave #{currentWaveId} · Accumulating Private Batch
             </b>
             <span className="badge live" style={{ fontSize: 11, padding: "2px 8px" }}>On-Chain Synced</span>
           </div>
-          <span className="mono" style={{ fontSize: 13, color: "var(--text3)" }}>
-            Cutoff in <strong style={{ color: "var(--text)" }}>00:{secondsLeft.toString().padStart(2, "0")}</strong> · Cadence 30s
-          </span>
+          
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              background: "rgba(131, 232, 192, 0.08)",
+              border: "1px solid rgba(131, 232, 192, 0.2)",
+              padding: "3px 10px",
+              borderRadius: 20,
+              fontSize: 12,
+              color: "var(--mint)",
+              fontWeight: 500,
+            }}>
+              <span>Est. Gas Saved:</span>
+              <strong className="mono">${estGasSavedUsd}</strong>
+            </div>
+
+            <span className="mono" style={{ fontSize: 13, color: "var(--text3)" }}>
+              Cutoff in <strong style={{ color: "var(--text)" }}>00:{secondsLeft.toString().padStart(2, "0")}</strong> · Cadence 30s
+            </span>
+          </div>
         </div>
 
-        {/* Live Netting Visual Bar */}
+        {/* Dual-Sided Volume Bar Header */}
         <div style={{ margin: "14px 0 10px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, marginBottom: 8, color: "var(--text2)" }}>
-            <span>Gross Buys (USDG): <strong className="mono" style={{ color: "var(--text)" }}>$84,200</strong></span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--violet)", fontWeight: 500 }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 13, height: 13 }}>
+            <span>
+              Accumulated Buys: <strong className="mono" style={{ color: "var(--text)" }}>{fmtUsd(liveBuys)}</strong>
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--violet)", fontWeight: 600 }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 13, height: 13 }}>
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
               </svg>
-              82.4% Netting Efficiency (Zero-Gas Internal Cross)
+              {pct(nettingEfficiency)} Netting Efficiency (Zero Price Impact)
             </span>
-            <span>Gross Sells (WETH): <strong className="mono" style={{ color: "var(--text)" }}>$69,400</strong></span>
+            <span>
+              Accumulated Sells: <strong className="mono" style={{ color: "var(--text)" }}>{fmtUsd(liveSells)}</strong>
+            </span>
           </div>
 
+          {/* Fluid Split Progress Bar */}
           <div style={{
-            height: 24,
-            borderRadius: 6,
+            height: 28,
+            borderRadius: 7,
             overflow: "hidden",
             display: "flex",
             background: "rgba(255,255,255,0.03)",
@@ -179,53 +224,48 @@ export default function WavesPage() {
             position: "relative",
           }}>
             <div style={{
-              width: "42%",
-              background: "rgba(131, 232, 192, 0.22)",
-              borderRight: "1px solid rgba(131, 232, 192, 0.4)",
+              width: `${matchedPct}%`,
+              background: "linear-gradient(90deg, rgba(131, 232, 192, 0.18) 0%, rgba(155, 140, 255, 0.26) 100%)",
+              borderRight: "1px solid rgba(155, 140, 255, 0.5)",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-between",
+              padding: "0 14px",
               fontSize: 11,
-              fontWeight: 500,
+              fontWeight: 600,
               color: "var(--mint)",
+              transition: "width 0.4s ease-out",
             }}>
-              Internal Matched ($69.4k)
+              <span>Zero-Gas Internal Cross</span>
+              <span className="mono" style={{ color: "var(--text)" }}>{fmtUsd(totalInternalMatched)} ({matchedPct}%)</span>
             </div>
+
             <div style={{
-              width: "40%",
-              background: "rgba(155, 140, 255, 0.22)",
-              borderRight: "1px solid rgba(155, 140, 255, 0.4)",
+              width: `${residualPct}%`,
+              background: "rgba(242, 192, 143, 0.16)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 11,
-              fontWeight: 500,
-              color: "var(--violet-pale)",
-            }}>
-              Opposing Matched ($69.4k)
-            </div>
-            <div style={{
-              width: "18%",
-              background: "rgba(242, 192, 143, 0.18)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              gap: 6,
               fontSize: 11,
               fontWeight: 500,
               color: "var(--warn)",
+              transition: "width 0.4s ease-out",
             }}>
-              Net Imbalance ($14.8k)
+              <span>Net Residual Imbalance</span>
+              <span className="mono font-semibold" style={{ color: "var(--warn)" }}>{fmtUsd(netResidual)}</span>
             </div>
           </div>
 
+          {/* Footnote Micro-Metrics */}
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, marginTop: 10, color: "var(--text3)" }}>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--mint)" }} />
-              Zero price-impact internal cross
+              Zero price-impact internal cross (MEV-proof bilateral settlement)
             </span>
             <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--warn)" }} />
-              Residual imbalance routed via Uniswap v4 EclipseHook
+              Residual imbalance routed via Uniswap v4 EclipseHook on block cutoff
             </span>
           </div>
         </div>
