@@ -437,7 +437,28 @@ export default function Terminal({ market }: { market: Market }) {
                 <dt>Status</dt>
                 <dd>Escrowed · awaiting wave settlement</dd>
                 <dt>Tx hash</dt>
-                <dd>{result.tx.slice(0, 18)}…</dd>
+                <dd>
+                  <a
+                    href={`https://testnet.explorer.chain.robinhood.com/tx/${result.tx}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "var(--mint)",
+                      textDecoration: "underline",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 4,
+                    }}
+                    title="View transaction on Robinhood Chain Explorer"
+                  >
+                    {result.tx.slice(0, 10)}…{result.tx.slice(-6)}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 11, height: 11 }}>
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </dd>
               </>
             ) : (
               <>
@@ -448,7 +469,28 @@ export default function Terminal({ market }: { market: Market }) {
                 <dt>Settlement root</dt>
                 <dd>{result.root.slice(0, 18)}…</dd>
                 <dt>Execution tx</dt>
-                <dd>{result.tx.slice(0, 18)}…</dd>
+                <dd>
+                  <a
+                    href={`https://testnet.explorer.chain.robinhood.com/tx/${result.tx}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "var(--mint)",
+                      textDecoration: "underline",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 4,
+                    }}
+                    title="View transaction on Robinhood Chain Explorer"
+                  >
+                    {result.tx.slice(0, 10)}…{result.tx.slice(-6)}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 11, height: 11 }}>
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </dd>
               </>
             )}
           </dl>
