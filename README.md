@@ -1,36 +1,206 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eclipse — Confidential Batch Netting Protocol
+
+[![Robinhood Chain Testnet](https://img.shields.io/badge/Robinhood_Chain-Testnet_46630-111827?style=flat-square&logo=ethereum)](https://testnet.explorer.chain.robinhood.com)
+[![Uniswap v4 Hook](https://img.shields.io/badge/Uniswap_v4-Hook_Enabled-ff007a?style=flat-square)](https://github.com/Uniswap/v4-core)
+[![zkVM Verified](https://img.shields.io/badge/ZK-zkVM_Groth16-83e8c0?style=flat-square)]()
+[![TypeScript SDK](https://img.shields.io/badge/SDK-%40eclipse%2Fsdk-3178c6?style=flat-square)](https://github.com/wealthy-org/Eclipse/tree/main/packages/sdk)
+
+> **Private while it forms. Public once it settles.**  
+> Eclipse is an institutional-grade dark pool and confidential batch auction protocol built on Robinhood Chain Testnet. It shields large trades from toxic MEV and public mempool front-running through zero-knowledge verifiable netting, settling residual imbalances through native Uniswap v4 liquidity hooks.
+
+---
+
+## Architecture Overview
+
+Eclipse decouples trade execution into confidential batch periods called **Waves** (cadence: 30s).
+
+```mermaid
+flowchart LR
+    subgraph Traders ["Confidential Trading"]
+        A[Trader / Intent] -->|Client-Salted Hash| B[EclipseOrderRegistry]
+        A2[Specter Shielded] -->|Shielded Intent| B2[SpecterEclipseAdapter]
+    end
+
+    subgraph BatchEngine ["Confidential Clearinghouse"]
+        B --> C[Wave Batch Accumulator]
+        B2 --> C
+        C -->|Wave Cutoff| D[Internal Bilateral Netting]
+        D -->|Zero Gas & MEV Cross| E[Internal Settlement]
+        D -->|ZK Batch Validity| F[zkVM Groth16 Prover]
+    end
+
+    subgraph OnChain ["On-Chain Settlement"]
+        E --> G[EclipsePrivateSettlement]
+        F --> H[EclipseBatchVerifier]
+        D -->|Residual Imbalance| I[Uniswap v4 EclipseHook]
+        I --> J[Uniswap v4 PoolManager]
+    end
+```
+
+### Core Architecture Layers:
+1. **Layer 1: Batch Auctions & Netting Engine**  
+   Accumulates opposing trade intents over a discrete time window (30-second cadence). Opposing buys and sells cross internally at a uniform clearing price with **zero price impact** and **zero AMM gas**.
+2. **Layer 2: Encrypted Order Commitments**  
+   Trades submitted in *Dark Mode* are obscured via deterministic client-side salt hashing (`computeCommitment`). Trade direction, amount out, and slippage thresholds remain completely concealed on-chain until the wave cutoff.
+3. **Layer 3: ZK Validity Proofs (`/zk`)**  
+   A high-performance Rust zkVM guest program validates batch conservation invariants without revealing individual trade payloads: proving no duplicate order IDs, unexpired limits, Merkle commitment inclusion, and exact netting balance conservation.
+4. **Layer 4: Shielded Settlement & Nullifiers**  
+   Private payouts are collected via [`EclipsePrivateSettlement.sol`](file:///Users/mac/Documents/Workspace/Work/Wealth/Oktober/25/Eclipse/contracts/src/EclipsePrivateSettlement.sol) using Merkle proofs and one-time nullifiers, preventing double claims while allowing withdrawal to unlinked stealth addresses.
+
+---
+
+## Deployed Smart Contracts
+
+All contracts are deployed, verified, and operational on **Robinhood Chain Testnet** (Chain ID: `46630`, Currency: `ETH`):
+
+| Contract | Address | Network | Description |
+|:---|:---|:---|:---|
+| **`EclipseOrderRegistry`** | [`0xA697AD15EB193c7e23c4208606587c2FEfDf92ad`](https://testnet.explorer.chain.robinhood.com/address/0xA697AD15EB193c7e23c4208606587c2FEfDf92ad) | Robinhood 46630 | Encrypted commitment escrow & internal match settlement |
+| **`EclipseHook`** | [`0x47c68C343C422790F998e9F777865554732560c4`](https://testnet.explorer.chain.robinhood.com/address/0x47c68C343C422790F998e9F777865554732560c4) | Robinhood 46630 | Uniswap v4 Hook with dynamic wave locking & 5 bps fee |
+| **`EclipseBatchVerifier`** | [`0x5b19C43F23DBfe73292FFC22a4147322ab90104F`](https://testnet.explorer.chain.robinhood.com/address/0x5b19C43F23DBfe73292FFC22a4147322ab90104F) | Robinhood 46630 | On-chain Groth16 verification of zkVM batch execution |
+| **`EclipsePrivateSettlement`**| [`0xAe07dB429A0902fB7f505a296E12C254A468eA74`](https://testnet.explorer.chain.robinhood.com/address/0xAe07dB429A0902fB7f505a296E12C254A468eA74) | Robinhood 46630 | Stealth payout distributor with nullifier anti-double-spend |
+| **`SpecterEclipseAdapter`** | [`0xcB548BA082ADA0D4FD37E8Cea4017212d6204343`](https://testnet.explorer.chain.robinhood.com/address/0xcB548BA082ADA0D4FD37E8Cea4017212d6204343) | Robinhood 46630 | Headless adapter for private wallet intents |
+| **`EclipseExecutorRoute`** | [`0xbBB7B5d51eAA07fBBc055fa2053F75376F8c3265`](https://testnet.explorer.chain.robinhood.com/address/0xbBB7B5d51eAA07fBBc055fa2053F75376F8c3265) | Robinhood 46630 | Executor-only hook validation for graduated pool tokens |
+| **Uniswap v4 `PoolManager`** | [`0x8366a39cc670b4001a1121b8f6a443a643e40951`](https://testnet.explorer.chain.robinhood.com/address/0x8366a39cc670b4001a1121b8f6a443a643e40951) | Robinhood 46630 | Official Uniswap v4 Core singleton |
+
+### Supported Asset Tokens:
+- **Mock WETH**: `0xb8A83409F449A87D73034F87EdDd191d97D72Dc6`
+- **Mock USDG**: `0x223F45A00B3212f4ec052450624C63eC457F2482`
+- **Mock NVDA (Tokenized US Equity)**: `0xdD453d93A8DCB74D75eD2aaD6bD967059d0BC545`
+- **Mock PONS (Graduated Community Token)**: `0xB1f64237714bFAf6941911aE821e66e8BbD01143`
+
+---
+
+## Active Markets
+
+| Pair | Asset Class | Route Mechanism | Protocol Fee | Settlement |
+|:---|:---|:---|:---|:---|
+| **WETH / USDG** | Crypto Native | Uniswap v4 · EclipseHook | 5 bps (0.05%) | zkVM Groth16 Proved |
+| **NVDA / USDG** | Tokenized Equity (RWA) | 24/7 Dark Pool Batch Netting | 5 bps (0.05%) | zkVM Groth16 Proved |
+| **PONS / USDG** | Graduated Community Token | Executor-Only Hook Route | 5 bps (0.05%) | On-Chain Enforced |
+
+---
+
+## Repository Structure
+
+```text
+Eclipse/
+├── app/                      # Next.js 16 Web Application (App Router, Turbopack)
+│   ├── (app)/
+│   │   ├── market/[id]/      # Interactive Trading Terminal & On-chain execution
+│   │   ├── markets/          # Live market cards & 24h continuous sparklines
+│   │   ├── waves/            # Dynamic Dual-Sided Netting Engine & batch telemetry
+│   │   ├── stats/            # Institutional metrics, volume analytics & MEV savings
+│   │   └── privacy/          # MEV sandwiching simulator & security specifications
+│   ├── api/                  # High-performance serverless endpoints with in-memory caching
+│   └── lib/                  # Web3 config (wagmi, viem), ABI definitions, DB client
+├── contracts/                # Foundry smart contracts suite
+│   ├── src/                  # EclipseHook, EclipseOrderRegistry, Verifiers, Adapters
+│   ├── script/               # Deployment and testnet wiring scripts
+│   └── test/                 # 33+ comprehensive Foundry invariant and unit tests
+├── packages/
+│   └── sdk/                  # @eclipse/sdk typed client library for bots & integrators
+├── services/
+│   └── matcher/              # Background matching engine & indexer daemon (Railway)
+│       ├── src/              # Sync, auto-reveal, internal matching, and netting core
+│       └── schema.sql        # NeonDB PostgreSQL schema
+└── zk/                       # Rust zkVM guest circuits proving netting invariants
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js >= 20.x
+- Foundry (`forge`, `cast`, `anvil`)
+- Rust toolchain (for zkVM circuit verification)
 
+### 1. Web Application Setup
 ```bash
+# Clone the repository
+git clone https://github.com/wealthy-org/Eclipse.git
+cd Eclipse
+
+# Install dependencies
+npm install
+
+# Configure environment variables
+cp .env.example .env.local
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the terminal.
+
+### 2. Smart Contracts (Foundry)
+```bash
+cd contracts
+
+# Install dependencies
+forge install
+
+# Run comprehensive test suite
+forge test -vvv
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Matcher & Indexer Daemon
+```bash
+cd services/matcher
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Install dependencies
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Run database migration
+npm run migrate
 
-## Learn More
+# Run background synchronization daemon
+npm run daemon
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Integration with `@eclipse/sdk`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Integrators, automated market makers, and trading bots can submit orders programmatically:
 
-## Deploy on Vercel
+```typescript
+import { EclipseClient, computeCommitment, generateSalt } from "@eclipse/sdk";
+import { parseUnits } from "viem";
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+const client = new EclipseClient({
+  rpcUrl: "https://rpc.testnet.chain.robinhood.com",
+  registryAddress: "0xA697AD15EB193c7e23c4208606587c2FEfDf92ad",
+});
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+// 1. Generate client-side cryptographic salt
+const secret = generateSalt();
+
+// 2. Hash commitment to hide limit price and direction
+const commitment = computeCommitment({
+  owner: userAddress,
+  tokenIn: "0x223F45A00B3212f4ec052450624C63eC457F2482", // USDG
+  tokenOut: "0xb8A83409F449A87D73034F87EdDd191d97D72Dc6", // WETH
+  amountIn: parseUnits("10000", 18),
+  minAmountOut: parseUnits("3.18", 18),
+  salt: secret,
+});
+
+// 3. Submit dark order commitment to on-chain registry
+await client.submitDarkOrder({ commitment, amountIn: parseUnits("10000", 18) });
+```
+
+---
+
+## Security & Privacy Invariants
+
+- **Zero Information Leakage:** Trade directions and minimum amounts out are masked as zeroes until wave cutoff.
+- **Strict Conservation of Value:** No token balance can be created or destroyed during internal batch crossing (checked both in smart contract logic and in Rust zkVM constraints).
+- **Double-Spend Immunity:** Private claims utilize unique deterministic nullifiers stored on-chain in `spentNullifiers`.
+- **Slippage Enforcement:** Every matched order is guaranteed to execute at or better than `minAmountOut`, or it remains uncrossed for public hook routing.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
