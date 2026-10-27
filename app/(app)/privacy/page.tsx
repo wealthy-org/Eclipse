@@ -57,7 +57,7 @@ export default function PrivacyPage() {
               MEV & Information Leakage Simulator
             </b>
             <span style={{ fontSize: 13, color: "var(--text3)", display: "block", marginTop: 4 }}>
-              Compare what public mempool searchers see versus what Eclipse reveals on Robinhood Chain testnet.
+              Compare what public mempool searchers see versus what Eclipse reveals on Robinhood Chain Mainnet.
             </span>
           </div>
           <span className="badge live" style={{ fontSize: 11, padding: "2px 8px" }}>Active Shielded Protection</span>

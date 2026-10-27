@@ -126,14 +126,14 @@ export default function WavesPage() {
           <p className="eyebrow">Eclipse Waves · On-Chain Batches</p>
           <h1 className="app-h1">Private while it forms. Public once it settles.</h1>
           <p className="app-lede">
-            Nothing about a wave shows until it trades. Every settled wave leaves a public receipt verifiable on Robinhood Chain Testnet —
+            Nothing about a wave shows until it trades. Every settled wave leaves a public receipt verifiable on Robinhood Chain —
             gross private volume, what matched internally, and the net amount that actually touched the pool.
           </p>
         </div>
         <div className="mkt-stats-bar">
           <div className="mkt-stat-chip">
-            <span>Testnet Registry</span>
-            <b style={{ fontSize: 13 }} className="mono">0xA697...92ad</b>
+            <span>Mainnet Registry</span>
+            <b style={{ fontSize: 13 }} className="mono">0x160A...630f</b>
           </div>
           <div className="mkt-stat-chip">
             <span>Wave Cadence</span>
@@ -356,7 +356,7 @@ export default function WavesPage() {
               <b className="mono">
                 {active.executionTx ? (
                   <a
-                    href={`https://explorer.testnet.chain.robinhood.com/tx/${active.executionTx}`}
+                    href={`https://robinhoodchain.blockscout.com/tx/${active.executionTx}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{ color: "var(--violet-pale)", textDecoration: "underline" }}

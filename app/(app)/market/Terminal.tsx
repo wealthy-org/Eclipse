@@ -20,7 +20,7 @@ type Track = "idle" | "committed" | "matching" | "settled";
 function friendlyTxError(err: unknown): string {
   const msg = err instanceof Error ? err.message : String(err);
   if (/user rejected|denied transaction/i.test(msg)) return "Transaction was rejected in your wallet.";
-  if (/insufficient funds/i.test(msg)) return "Not enough ETH on Robinhood Chain testnet to pay gas.";
+  if (/insufficient funds/i.test(msg)) return "Not enough ETH on Robinhood Chain to pay gas.";
   if (/exceeds balance|underflow|transfer amount exceeds/i.test(msg)) return "Insufficient token balance for this amount.";
   if (/ZeroAmount/i.test(msg)) return "Enter an amount greater than zero.";
   if (/OrderExpired/i.test(msg)) return "Order expiry is in the past — try again.";
@@ -237,7 +237,7 @@ export default function Terminal({ market }: { market: Market }) {
             <b>{canTradeOnChain ? "Submitting escrows your order on-chain" : "Next Eclipse Wave"}</b>
             <span className="mono">
               {canTradeOnChain
-                ? "Robinhood Chain testnet · EclipseOrderRegistry"
+                ? "Robinhood Chain · EclipseOrderRegistry"
                 : "Private demand · hidden until it settles"}
             </span>
           </div>
@@ -429,7 +429,7 @@ export default function Terminal({ market }: { market: Market }) {
         <div className="result">
           <div className="r-head">
             <span>{result.onchain ? "Order submitted on-chain" : "Order settled"}</span>
-            <span className="sim">{result.onchain ? "Robinhood testnet · live" : "Testnet · zkVM Proved"}</span>
+            <span className="sim">{result.onchain ? "Robinhood Chain · live" : "zkVM Proved"}</span>
           </div>
           <dl className="r-grid">
             {result.onchain ? (
@@ -439,7 +439,7 @@ export default function Terminal({ market }: { market: Market }) {
                 <dt>Tx hash</dt>
                 <dd>
                   <a
-                    href={`https://testnet.explorer.chain.robinhood.com/tx/${result.tx}`}
+                    href={`https://robinhoodchain.blockscout.com/tx/${result.tx}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
@@ -471,7 +471,7 @@ export default function Terminal({ market }: { market: Market }) {
                 <dt>Execution tx</dt>
                 <dd>
                   <a
-                    href={`https://testnet.explorer.chain.robinhood.com/tx/${result.tx}`}
+                    href={`https://robinhoodchain.blockscout.com/tx/${result.tx}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{

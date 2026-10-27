@@ -155,7 +155,7 @@ export default function MyOrders() {
     <div className="my-orders">
       <div className="my-orders-head">
         <h3>My orders</h3>
-        <span className="sim">Robinhood testnet · live</span>
+        <span className="sim">Robinhood Chain · live</span>
       </div>
       {loading && (
         <div className="hidden-box">
@@ -198,7 +198,7 @@ export default function MyOrders() {
                   <td className="w">
                     {r.txHash ? (
                       <a
-                        href={`https://testnet.explorer.chain.robinhood.com/tx/${r.txHash}`}
+                        href={`https://robinhoodchain.blockscout.com/tx/${r.txHash}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

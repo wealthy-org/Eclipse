@@ -452,7 +452,7 @@ trader → private order → Eclipse Wave → match → net
         <h2>Eclipse Wave lifecycle</h2>
         <div class="states"><span>OPEN</span><span>LOCKED</span><span>MATCHING</span><span>PROVING</span><span>EXECUTING</span><span>SETTLING</span><span>SETTLED</span><span class="f">FAILED</span></div>
         <p>While a wave is <code>OPEN</code>, orders accumulate. At cutoff the wave becomes <code>LOCKED</code> and no order can join or leave. Matching, proving, execution and settlement follow.</p>
-        <p>Wave length is a trade-off. Short waves feel faster but have a smaller privacy set. Long waves gather more orders but add latency and price movement. Research targets are 15, 30, 60 and 120 seconds, with 30 to 60 seconds as a testnet starting point. The demo on this site uses 30 second waves with accelerated settlement.</p>
+        <p>Wave length is a trade-off. Short waves feel faster but have a smaller privacy set. Long waves gather more orders but add latency and price movement. Research targets are 15, 30, 60 and 120 seconds, with 30 to 60 seconds as an initial production baseline. The demo on this site uses 30 second waves with accelerated settlement.</p>
         <div class="callout"><span data-icon="info"></span><div>Never publish gross buy or sell imbalance, net direction or large-order presence before a wave executes. Only post-execution statistics are public.</div></div>
       </section>
 

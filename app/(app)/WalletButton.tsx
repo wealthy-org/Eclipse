@@ -22,23 +22,24 @@ function fmtEth(wei: bigint) {
   return n < 0.0001 && n > 0 ? "<0.0001" : n.toFixed(4);
 }
 
-/// Adds/switches to Robinhood Chain Testnet in the connected wallet. `switchChain` fails with a
+/// Adds/switches to Robinhood Chain Mainnet in the connected wallet. `switchChain` fails with a
 /// "chain not added" error (EIP-3085 code 4902) in wallets that don't already know this chain —
 /// fall back to asking the wallet to add it directly.
 async function switchOrAddChain() {
   const eth = (window as unknown as { ethereum?: { request: (args: { method: string; params?: unknown[] }) => Promise<unknown> } }).ethereum;
   if (!eth) return;
   try {
-    await eth.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0xb626" }] });
+    await eth.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x1237" }] });
   } catch {
     await eth.request({
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: "0xb626",
+          chainId: "0x1237",
           chainName: robinhoodTestnet.name,
           nativeCurrency: robinhoodTestnet.nativeCurrency,
           rpcUrls: robinhoodTestnet.rpcUrls.default.http,
+          blockExplorerUrls: [robinhoodTestnet.blockExplorers.default.url],
         },
       ],
     });
@@ -77,7 +78,7 @@ export function WalletRailButton() {
                 </button>
               ) : (
                 <b className="mono" style={{ color: "var(--mint)" }}>
-                  Robinhood Testnet
+                  Robinhood Chain
                 </b>
               )}
             </div>
@@ -137,7 +138,7 @@ export function WalletInlineButton() {
         </div>
         {wrongNetwork ? (
           <button type="button" className="btn btn-sm btn-ghost" onClick={switchOrAddChain}>
-            Switch to testnet
+            Switch to Robinhood Chain
           </button>
         ) : (
           <button type="button" className="btn-link" onClick={() => disconnect()}>

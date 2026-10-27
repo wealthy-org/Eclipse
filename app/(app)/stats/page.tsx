@@ -745,7 +745,7 @@ export default function StatsPage() {
         }}>
           <b style={{ fontSize: 16, display: "block", marginBottom: 6 }}>Verified Contract Infrastructure</b>
           <span style={{ fontSize: 12, color: "var(--text3)", display: "block", marginBottom: 16 }}>
-            Robinhood Chain Testnet live deployed addresses
+            Robinhood Chain Mainnet live deployed addresses
           </span>
           <div style={{ display: "grid", gap: 10, fontSize: 12 }} className="mono">
             <div style={{ display: "flex", justifyContent: "space-between" }}>

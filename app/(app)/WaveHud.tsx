@@ -17,7 +17,7 @@ export default function WaveHud() {
   useEffect(() => {
     async function syncWaveId() {
       try {
-        const res = await fetch("https://rpc.testnet.chain.robinhood.com", {
+        const res = await fetch("https://rpc.mainnet.chain.robinhood.com", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -26,7 +26,7 @@ export default function WaveHud() {
             method: "eth_call",
             params: [
               {
-                to: "0xA697AD15EB193c7e23c4208606587c2FEfDf92ad",
+                to: "0x160A84e238Fa34f050630b37f55c2137A40b630f",
                 data: "0xc82335c5", // currentWaveId() selector
               },
               "latest",

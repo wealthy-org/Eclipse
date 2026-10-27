@@ -57,7 +57,7 @@ export default function FaucetSandbox() {
   async function dispenseAll() {
     if (!address || loadingAll || loadingToken) return;
     setLoadingAll(true);
-    setStatusMsg("Dispensing multi-asset package to your wallet on Robinhood Chain testnet...");
+    setStatusMsg("Dispensing multi-asset package to your wallet on Robinhood Chain...");
 
     try {
       for (const t of tokens) {
