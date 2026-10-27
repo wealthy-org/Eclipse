@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAccount, useBalance, useConnect, useDisconnect } from "wagmi";
-import { robinhoodTestnet } from "../lib/chains";
+import { robinhoodMainnet } from "../lib/chains";
 
 /// Wallet connection state is only known in the browser (wagmi restores it from localStorage
 /// after mount). Rendering it during SSR/first paint causes a hydration mismatch — gate on this
@@ -36,10 +36,10 @@ async function switchOrAddChain() {
       params: [
         {
           chainId: "0x1237",
-          chainName: robinhoodTestnet.name,
-          nativeCurrency: robinhoodTestnet.nativeCurrency,
-          rpcUrls: robinhoodTestnet.rpcUrls.default.http,
-          blockExplorerUrls: [robinhoodTestnet.blockExplorers.default.url],
+          chainName: robinhoodMainnet.name,
+          nativeCurrency: robinhoodMainnet.nativeCurrency,
+          rpcUrls: robinhoodMainnet.rpcUrls.default.http,
+          blockExplorerUrls: [robinhoodMainnet.blockExplorers.default.url],
         },
       ],
     });
@@ -48,8 +48,8 @@ async function switchOrAddChain() {
 
 function useWalletInfo() {
   const { address, isConnected, chainId } = useAccount();
-  const { data: balance } = useBalance({ address, chainId: robinhoodTestnet.id, query: { enabled: isConnected } });
-  const wrongNetwork = isConnected && chainId !== robinhoodTestnet.id;
+  const { data: balance } = useBalance({ address, chainId: robinhoodMainnet.id, query: { enabled: isConnected } });
+  const wrongNetwork = isConnected && chainId !== robinhoodMainnet.id;
   return { address, isConnected, wrongNetwork, balance };
 }
 
