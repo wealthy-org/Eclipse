@@ -1,15 +1,12 @@
-// Phase 1 contract addresses, deployed to Robinhood Chain testnet (46630) per
-// 25/Eclipse/contracts/broadcast/*/46630/run-latest.json. Mock WETH/USDG stand in for the real
-// tokens until Robinhood Chain's own WETH/USDG are confirmed (see ROBINHOOD_POOL_MATRIX.md).
+// Phase 1 contract addresses, deployed to Robinhood Chain Mainnet (4663)
+export const ECLIPSE_ORDER_REGISTRY_ADDRESS = "0x160A84e238Fa34f050630b37f55c2137A40b630f" as const;
+export const ECLIPSE_BATCH_VERIFIER_ADDRESS = "0x072E0ac3795C67D4C6cC17dCBB3865Fb115a1E0d" as const;
 export const ECLIPSE_HOOK_ADDRESS = "0x47c68C343C422790F998e9F777865554732560c4" as const;
-export const ECLIPSE_ORDER_REGISTRY_ADDRESS = "0xA697AD15EB193c7e23c4208606587c2FEfDf92ad" as const;
-export const ECLIPSE_BATCH_VERIFIER_ADDRESS = "0x5b19C43F23DBfe73292FFC22a4147322ab90104F" as const;
 export const ECLIPSE_PRIVATE_SETTLEMENT_ADDRESS = "0xAe07dB429A0902fB7f505a296E12C254A468eA74" as const;
 export const SPECTER_ECLIPSE_ADAPTER_ADDRESS = "0xcB548BA082ADA0D4FD37E8Cea4017212d6204343" as const;
 export const ECLIPSE_EXECUTOR_ROUTE_ADDRESS = "0xbBB7B5d51eAA07fBBc055fa2053F75376F8c3265" as const;
-/// Block the registry was deployed at — bounds event log scans so the frontend never has to
-/// scan from genesis.
-export const ECLIPSE_ORDER_REGISTRY_DEPLOY_BLOCK = BigInt(142478553);
+/// Block the registry was deployed at on Robinhood Chain Mainnet
+export const ECLIPSE_ORDER_REGISTRY_DEPLOY_BLOCK = BigInt(99127500);
 export const POOL_MANAGER_ADDRESS = "0x8366a39cc670b4001a1121b8f6a443a643e40951" as const;
 
 export const MOCK_TOKENS = {
