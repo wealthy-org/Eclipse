@@ -2,16 +2,17 @@ import "dotenv/config";
 import { createPublicClient, createWalletClient, defineChain, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
-export const robinhoodTestnet = defineChain({
-  id: 46630,
-  name: "Robinhood Chain Testnet",
+export const robinhoodMainnet = defineChain({
+  id: 4663,
+  name: "Robinhood Chain",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: { default: { http: [process.env.ROBINHOOD_TESTNET_RPC_URL ?? "https://rpc.testnet.chain.robinhood.com"] } },
-  testnet: true,
+  rpcUrls: { default: { http: [process.env.ROBINHOOD_RPC_URL ?? "https://rpc.mainnet.chain.robinhood.com"] } },
 });
 
+export const robinhoodTestnet = robinhoodMainnet;
+
 export const publicClient = createPublicClient({
-  chain: robinhoodTestnet,
+  chain: robinhoodMainnet,
   transport: http(),
 });
 

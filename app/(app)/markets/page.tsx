@@ -318,7 +318,7 @@ export default function MarketsPage() {
                 </li>
                 <li style={{ display: "flex", justifyContent: "space-between" }}>
                   <span>Target Chain:</span>
-                  <strong className="mono" style={{ color: "var(--text)" }}>Robinhood Testnet (ID 46630)</strong>
+                  <strong className="mono" style={{ color: "var(--text)" }}>Robinhood Chain (ID 4663)</strong>
                 </li>
                 <li style={{ display: "flex", justifyContent: "space-between", paddingTop: 8, borderTop: "1px solid var(--line)" }}>
                   <span>On-Chain Verified Hook:</span>

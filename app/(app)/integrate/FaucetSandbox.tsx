@@ -87,11 +87,11 @@ export default function FaucetSandbox() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 14 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <h3 style={{ margin: 0, fontSize: 18 }}>Testnet Faucet &amp; Asset Sandbox</h3>
-            <span className="badge live" style={{ fontSize: 11, padding: "2px 8px" }}>Robinhood Chain Testnet</span>
+            <h3 style={{ margin: 0, fontSize: 18 }}>Asset Sandbox &amp; Mint Tool</h3>
+            <span className="badge live" style={{ fontSize: 11, padding: "2px 8px" }}>Robinhood Chain (ID 4663)</span>
           </div>
           <p style={{ margin: "6px 0 0", color: "var(--text3)", fontSize: 13 }}>
-            Instant token liquidity for developers, integrators, and auditors testing dark batch netting on Robinhood Chain (ID 46630).
+            Token liquidity sandbox for developers, integrators, and auditors testing dark batch netting on Robinhood Chain (ID 4663).
           </p>
         </div>
 

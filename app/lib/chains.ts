@@ -1,13 +1,18 @@
 import { defineChain } from "viem";
 
-// Robinhood Chain testnet. Not a built-in viem/wagmi chain, so defined here from the official
-// docs (docs.robinhood.com/chain/connecting) — chain id 46630, confirmed live via eth_chainId.
-export const robinhoodTestnet = defineChain({
-  id: 46630,
-  name: "Robinhood Chain Testnet",
+// Robinhood Chain Mainnet — Chain ID 4663 (0x1237), official RPC
+export const robinhoodMainnet = defineChain({
+  id: 4663,
+  name: "Robinhood Chain",
   nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
   rpcUrls: {
-    default: { http: ["https://rpc.testnet.chain.robinhood.com"] },
+    default: { http: ["https://rpc.mainnet.chain.robinhood.com"] },
   },
-  testnet: true,
+  blockExplorers: {
+    default: { name: "Blockscout", url: "https://robinhoodchain.blockscout.com" },
+  },
 });
+
+// Backward-compatibility alias
+export const robinhoodTestnet = robinhoodMainnet;
+

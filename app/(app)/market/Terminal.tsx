@@ -498,7 +498,7 @@ export default function Terminal({ market }: { market: Market }) {
       )}
 
       <p className="disc">
-        Robinhood Chain Testnet (Chain ID 46630). Verifier on-chain dengan bukti zero-knowledge zkVM batch &amp; private settlement.
+        Robinhood Chain (Chain ID 4663). Verifier on-chain dengan bukti zero-knowledge zkVM batch &amp; private settlement.
       </p>
 
       {toast && (

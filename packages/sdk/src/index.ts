@@ -8,7 +8,8 @@ import {
   toBytes,
 } from "viem";
 
-export const ROBINHOOD_TESTNET_CHAIN_ID = 46630;
+export const ROBINHOOD_CHAIN_ID = 4663;
+export const ROBINHOOD_TESTNET_CHAIN_ID = ROBINHOOD_CHAIN_ID;
 
 export const ECLIPSE_DEPLOYED_CONTRACTS = {
   hook: "0x47c68C343C422790F998e9F777865554732560c4" as Address,

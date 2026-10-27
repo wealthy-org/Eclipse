@@ -1,62 +1,21 @@
-# Eclipse — Confidential Batch Netting Protocol
-
-[![Robinhood Chain Testnet](https://img.shields.io/badge/Robinhood_Chain-Testnet_46630-111827?style=flat-square&logo=ethereum)](https://testnet.explorer.chain.robinhood.com)
+[![Robinhood Chain](https://img.shields.io/badge/Robinhood_Chain-Mainnet_4663-111827?style=flat-square&logo=ethereum)](https://robinhoodchain.blockscout.com)
 [![Uniswap v4 Hook](https://img.shields.io/badge/Uniswap_v4-Hook_Enabled-ff007a?style=flat-square)](https://github.com/Uniswap/v4-core)
 [![zkVM Verified](https://img.shields.io/badge/ZK-zkVM_Groth16-83e8c0?style=flat-square)]()
 [![TypeScript SDK](https://img.shields.io/badge/SDK-%40eclipse%2Fsdk-3178c6?style=flat-square)](https://github.com/wealthy-org/Eclipse/tree/main/packages/sdk)
 [![Twitter/X](https://img.shields.io/badge/Twitter-@eclipsehook-000000?style=flat-square&logo=x)](https://x.com/eclipsehook)
 
 > **Private while it forms. Public once it settles.**  
-> Eclipse is an institutional-grade dark pool and confidential batch auction protocol built on Robinhood Chain Testnet. It shields large trades from toxic MEV and public mempool front-running through zero-knowledge verifiable netting, settling residual imbalances through native Uniswap v4 liquidity hooks. Follow [@eclipsehook](https://x.com/eclipsehook) for updates.
-
----
-
-## Architecture Overview
-
-Eclipse decouples trade execution into confidential batch periods called **Waves** (cadence: 30s).
-
-```mermaid
-flowchart LR
-    subgraph Traders ["Confidential Trading"]
-        A[Trader / Intent] -->|Client-Salted Hash| B[EclipseOrderRegistry]
-        A2[Specter Shielded] -->|Shielded Intent| B2[SpecterEclipseAdapter]
-    end
-
-    subgraph BatchEngine ["Confidential Clearinghouse"]
-        B --> C[Wave Batch Accumulator]
-        B2 --> C
-        C -->|Wave Cutoff| D[Internal Bilateral Netting]
-        D -->|Zero Gas & MEV Cross| E[Internal Settlement]
-        D -->|ZK Batch Validity| F[zkVM Groth16 Prover]
-    end
-
-    subgraph OnChain ["On-Chain Settlement"]
-        E --> G[EclipsePrivateSettlement]
-        F --> H[EclipseBatchVerifier]
-        D -->|Residual Imbalance| I[Uniswap v4 EclipseHook]
-        I --> J[Uniswap v4 PoolManager]
-    end
-```
-
-### Core Architecture Layers:
-1. **Layer 1: Batch Auctions & Netting Engine**  
-   Accumulates opposing trade intents over a discrete time window (30-second cadence). Opposing buys and sells cross internally at a uniform clearing price with **zero price impact** and **zero AMM gas**.
-2. **Layer 2: Encrypted Order Commitments**  
-   Trades submitted in *Dark Mode* are obscured via deterministic client-side salt hashing (`computeCommitment`). Trade direction, amount out, and slippage thresholds remain completely concealed on-chain until the wave cutoff.
-3. **Layer 3: ZK Validity Proofs (`/zk`)**  
-   A high-performance Rust zkVM guest program validates batch conservation invariants without revealing individual trade payloads: proving no duplicate order IDs, unexpired limits, Merkle commitment inclusion, and exact netting balance conservation.
-4. **Layer 4: Shielded Settlement & Nullifiers**  
-   Private payouts are collected via [`EclipsePrivateSettlement.sol`](file:///Users/mac/Documents/Workspace/Work/Wealth/Oktober/25/Eclipse/contracts/src/EclipsePrivateSettlement.sol) using Merkle proofs and one-time nullifiers, preventing double claims while allowing withdrawal to unlinked stealth addresses.
+> Eclipse is an institutional-grade dark pool and confidential batch auction protocol built on Robinhood Chain. It shields large trades from toxic MEV and public mempool front-running through zero-knowledge verifiable netting, settling residual imbalances through native Uniswap v4 liquidity hooks. Follow [@eclipsehook](https://x.com/eclipsehook) for updates.
 
 ---
 
 ## Deployed Smart Contracts
 
-All contracts are deployed, verified, and operational on **Robinhood Chain Testnet** (Chain ID: `46630`, Currency: `ETH`):
+Architecture contracts targeted for **Robinhood Chain** (Chain ID: `4663`, Currency: `ETH`):
 
 | Contract | Address | Network | Description |
 |:---|:---|:---|:---|
-| **`EclipseOrderRegistry`** | [`0xA697AD15EB193c7e23c4208606587c2FEfDf92ad`](https://testnet.explorer.chain.robinhood.com/address/0xA697AD15EB193c7e23c4208606587c2FEfDf92ad) | Robinhood 46630 | Encrypted commitment escrow & internal match settlement |
+| **`EclipseOrderRegistry`** | [`0xA697AD15EB193c7e23c4208606587c2FEfDf92ad`](https://robinhoodchain.blockscout.com/address/0xA697AD15EB193c7e23c4208606587c2FEfDf92ad) | Robinhood 4663 | Encrypted commitment escrow & internal match settlement |
 | **`EclipseHook`** | [`0x47c68C343C422790F998e9F777865554732560c4`](https://testnet.explorer.chain.robinhood.com/address/0x47c68C343C422790F998e9F777865554732560c4) | Robinhood 46630 | Uniswap v4 Hook with dynamic wave locking & 5 bps fee |
 | **`EclipseBatchVerifier`** | [`0x5b19C43F23DBfe73292FFC22a4147322ab90104F`](https://testnet.explorer.chain.robinhood.com/address/0x5b19C43F23DBfe73292FFC22a4147322ab90104F) | Robinhood 46630 | On-chain Groth16 verification of zkVM batch execution |
 | **`EclipsePrivateSettlement`**| [`0xAe07dB429A0902fB7f505a296E12C254A468eA74`](https://testnet.explorer.chain.robinhood.com/address/0xAe07dB429A0902fB7f505a296E12C254A468eA74) | Robinhood 46630 | Stealth payout distributor with nullifier anti-double-spend |

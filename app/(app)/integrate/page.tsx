@@ -27,9 +27,9 @@ export default function IntegratePage() {
           <pre>
             <code>
               <span className="k">import</span> {"{ EclipseClient, parseUnits }"} <span className="k">from</span> <span className="s">&apos;@eclipse/sdk&apos;</span>{"\n\n"}
-              <span className="c">{"// 1. Initialize Eclipse client for Robinhood Chain Testnet"}</span>{"\n"}
+              <span className="c">{"// 1. Initialize Eclipse client for Robinhood Chain Mainnet"}</span>{"\n"}
               <span className="k">const</span> eclipse = <span className="k">new</span> <span className="f">EclipseClient</span>({"{"}{"\n"}
-              {"  "}chainId: <span className="m">46630</span>,{"\n"}
+              {"  "}chainId: <span className="m">4663</span>,{"\n"}
               {"  "}registry: <span className="s">&apos;0xA697AD15EB193c7e23c4208606587c2FEfDf92ad&apos;</span>,{"\n"}
               {"}"}){"\n\n"}
               <span className="c">{"// 2. Submit Dark Mode encrypted commitment (hides direction & limit)"}</span>{"\n"}

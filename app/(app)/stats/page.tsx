@@ -193,7 +193,7 @@ export default function StatsPage() {
           <p className="eyebrow">Protocol Telemetry &amp; Verification</p>
           <h1 className="app-h1">Stats &amp; Execution Analytics</h1>
           <p className="app-lede">
-            Aggregated institutional-grade telemetry across Robinhood Chain Testnet (Chain ID 46630). Zero individual identity, order direction, or slippage limits are exposed — only post-execution ZK-verified batches.
+            Aggregated institutional-grade telemetry across Robinhood Chain (Chain ID 4663). Zero individual identity, order direction, or slippage limits are exposed — only post-execution ZK-verified batches.
           </p>
         </div>
         <div className="mkt-stats-bar">
