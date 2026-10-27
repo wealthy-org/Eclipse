@@ -30,7 +30,7 @@ export default function IntegratePage() {
               <span className="c">{"// 1. Initialize Eclipse client for Robinhood Chain Mainnet"}</span>{"\n"}
               <span className="k">const</span> eclipse = <span className="k">new</span> <span className="f">EclipseClient</span>({"{"}{"\n"}
               {"  "}chainId: <span className="m">4663</span>,{"\n"}
-              {"  "}registry: <span className="s">&apos;0xA697AD15EB193c7e23c4208606587c2FEfDf92ad&apos;</span>,{"\n"}
+              {"  "}registry: <span className="s">&apos;0x160A84e238Fa34f050630b37f55c2137A40b630f&apos;</span>,{"\n"}
               {"}"}){"\n\n"}
               <span className="c">{"// 2. Submit Dark Mode encrypted commitment (hides direction & limit)"}</span>{"\n"}
               <span className="k">const</span> tx = <span className="k">await</span> eclipse.<span className="f">submitCommitment</span>({"{"}{"\n"}
@@ -65,7 +65,7 @@ export default function IntegratePage() {
             <div style={{ marginTop: 24, paddingTop: 18, borderTop: "1px solid var(--line)" }}>
               <span style={{ fontSize: 12, color: "var(--text3)", display: "block" }}>Contract ABI & Interface</span>
               <div className="mono" style={{ fontSize: 12, color: "#fff", marginTop: 4 }}>
-                EclipseOrderRegistry: 0xA697...92ad
+                EclipseOrderRegistry: 0x160A...630f
               </div>
             </div>
 
@@ -76,8 +76,9 @@ export default function IntegratePage() {
         </div>
       </div>
 
-      {/* Interactive Faucet & Asset Sandbox */}
+      {/* Interactive Faucet & Asset Sandbox (Hidden for Mainnet)
       <FaucetSandbox />
+      */}
     </div>
   );
 }
