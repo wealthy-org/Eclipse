@@ -23,10 +23,10 @@ export interface TokenMeta {
 }
 
 export const TOKENS: Record<string, TokenMeta> = {
-  USDG: { symbol: "USDG", show: 2, inDec: 2, name: "USDG", sub: "Dollar stable · Testnet live" },
-  WETH: { symbol: "WETH", show: 4, inDec: 6, name: "WETH", sub: "Wrapped Ether · Testnet live" },
-  NVDA: { symbol: "NVDA", show: 2, inDec: 4, name: "NVDA", sub: "NVIDIA Stock Token · Testnet live" },
-  PONS: { symbol: "PONS", show: 2, inDec: 4, name: "PONS", sub: "Pons Graduated Token · Testnet live" },
+  USDG: { symbol: "USDG", show: 2, inDec: 2, name: "USDG", sub: "Dollar stable · Mainnet live" },
+  WETH: { symbol: "WETH", show: 4, inDec: 6, name: "WETH", sub: "Wrapped Ether · Mainnet live" },
+  NVDA: { symbol: "NVDA", show: 2, inDec: 4, name: "NVDA", sub: "NVIDIA Stock Token · Mainnet live" },
+  PONS: { symbol: "PONS", show: 2, inDec: 4, name: "PONS", sub: "Pons Graduated Token · Mainnet live" },
 };
 
 export type MarketStatus = "live" | "research" | "planned";
@@ -52,7 +52,7 @@ export const MARKETS: Market[] = [
     quote: "USDG",
     venue: "Uniswap v4 · EclipseHook",
     status: "live",
-    note: "Robinhood Chain Testnet · zkVM Proved",
+    note: "Robinhood Chain Mainnet · zkVM Proved",
     price: "3,142.50",
     pool: { base: 4200, quote: 13198500 },
   },
@@ -63,7 +63,7 @@ export const MARKETS: Market[] = [
     quote: "USDG",
     venue: "Tokenized Equity · 24/7 Dark Pool",
     status: "live",
-    note: "Robinhood Chain Testnet · zkVM Proved",
+    note: "Robinhood Chain Mainnet · zkVM Proved",
     price: "138.25",
     pool: { base: 45000, quote: 6221250 },
   },
@@ -74,7 +74,7 @@ export const MARKETS: Market[] = [
     quote: "USDG",
     venue: "Graduated Pons · Executor Route",
     status: "live",
-    note: "Robinhood Chain Testnet · zkVM Proved",
+    note: "Robinhood Chain Mainnet · zkVM Proved",
     price: "0.485",
     pool: { base: 2500000, quote: 1212500 },
   },
