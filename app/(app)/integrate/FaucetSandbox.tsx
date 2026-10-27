@@ -13,10 +13,10 @@ export default function FaucetSandbox() {
   const [statusMsg, setStatusMsg] = useState<string | null>(null);
 
   const tokens = [
-    { symbol: "WETH", name: "Mock Wrapped Ether", address: MOCK_TOKENS.WETH, amount: "0.1", label: "0.1 WETH" },
-    { symbol: "USDG", name: "Mock USD Global", address: MOCK_TOKENS.USDG, amount: "500", label: "500 USDG" },
-    { symbol: "NVDA", name: "Mock NVIDIA Stock", address: MOCK_TOKENS.NVDA, amount: "5", label: "5 NVDA" },
-    { symbol: "PONS", name: "Mock Pons Token", address: MOCK_TOKENS.PONS, amount: "100", label: "100 PONS" },
+    { symbol: "WETH", name: "Wrapped Ether", address: MOCK_TOKENS.WETH, amount: "0.1", label: "0.1 WETH" },
+    { symbol: "USDG", name: "USD Global", address: MOCK_TOKENS.USDG, amount: "500", label: "500 USDG" },
+    { symbol: "NVDA", name: "NVIDIA Tokenized Stock", address: MOCK_TOKENS.NVDA, amount: "5", label: "5 NVDA" },
+    { symbol: "PONS", name: "Pons Protocol", address: MOCK_TOKENS.PONS, amount: "100", label: "100 PONS" },
   ];
 
   const contractsConfig = tokens.map((t) => ({
