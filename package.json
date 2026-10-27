@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "mainnet:demo": "npx tsx scripts/demo-mainnet.ts",
     "test:demo": "npx tsx scripts/stream-tests.ts",
     "zk:demo": "npx tsx scripts/stream-zk.ts"
   },
